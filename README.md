@@ -17,7 +17,7 @@ $ ssh -T git@github.com
 clone DC:
 $ cd ~/.Desktop
 $ git clone git@github.com:JJLi0427/DC.git
-push to DC:    
-$ git add .    
+push to DC:
+$ git add .
 $ git commit
 $ git push origin main

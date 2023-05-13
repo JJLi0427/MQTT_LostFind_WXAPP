@@ -17,6 +17,8 @@ $ ssh -T git@github.com
 clone DC:  
 $ cd ~/.Desktop  
 $ git clone git@github.com:JJLi0427/DC.git  
+upadte code from remote:  
+$ git pull  
 push to DC:  
 $ git add .  
 $ git commit  

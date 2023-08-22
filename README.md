@@ -43,7 +43,7 @@ Run go application with go mod:
 
 Buid code for arm platform:  
 for windows 'GOOS=windows GOARCH=amd64 go build -o xxx xxx.go'  
-for linux 'GOOS=linux GOARCH=arm64 GOARM=7 go build -o xxx xxx.go'
+for linux 'GOOS=linux GOARCH=arm64 GOARM=7 go build -o xxx xxx.go' or 'GOOS=linux GOARCH=arm GOARM=7 go build -o xxx xxx.go'
 
 ## ABOUT WXAPP
 Download develop tool form (https://mp.weixin.qq.com/), scan the QR code to login.  

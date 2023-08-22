@@ -1,0 +1,45 @@
+<!--pages/add/add.wxml-->
+<view class="container">
+  <view class="top">
+    <view class="first">我的遗失物品数量</view>
+    <view class="sum">{{mylost.total}}</view>
+  </view>
+  <view class="function">
+    <navigator class="menu">
+      <image src="/images/new.png" style="width: 40rpx; height: 40rpx;"></image>
+      <view>新增</view>
+    </navigator>
+    <navigator class="menu">
+      <image src="/images/all.png" style="width: 40rpx; height: 40rpx;"></image>
+      <view>历史</view>
+    </navigator>
+  </view>
+  <view class="table">
+    <view class="item">
+      <view class="title">失物列表</view>
+    </view>
+    <view class="item" wx:for="{{mylost.list}}" wx:for-item="row" wx:key="index">
+      <view class="save">
+        <view class="photo">
+          <image src="{{row.photo}}" mode='aspectFit'></image>
+        </view>
+        <view class="moredata">
+          <view class="name">{{row.name}}</view>
+          <view>
+            <view class="txt">
+              <lable class="zh">遗失位置</lable>
+              <label class="en">| AREA</label>
+            </view>
+            <view class="area">
+              <label class="area">@{{row.area}}</label>
+            </view>
+          </view>
+        </view>
+        <view class="delete" bindtap="doDeleteRow" data-nid="{{row.id}}" data-index="{{index}}" >
+          <label>🗑️</label>
+        </view>
+      </view>
+    </view>
+ 
+  </view>
+</view>

@@ -1,0 +1,7 @@
+/* pages/one/one.wxss */
+
+.box{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

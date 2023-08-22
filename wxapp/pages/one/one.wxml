@@ -1,0 +1,2 @@
+<!--pages/one/one.wxml-->
+<text bindtap="getnews">MY</text>

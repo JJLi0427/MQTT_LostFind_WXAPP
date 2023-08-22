@@ -1,0 +1,104 @@
+/* pages/add/add.wxss */
+
+.top{
+  background-color: #ffe605;
+  height: 200rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+.top .first{
+  font-size: 40rpx;
+  font-weight: 900;
+}
+.top .sum{
+  font-size: 75rpx;
+  padding: 15rpx;
+  font-weight: 900;
+}
+
+.function{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: #ffc506;
+}
+.function .menu{
+  height: 100rpx;
+  width: 374rpx;
+  margin: 20rpx 0;
+  font-size: 30rpx;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.function .menu:nth-child(odd){
+  border-right: 1rpx solid white;
+}
+
+.table .item{
+  border-bottom: 1px solid #e7e7e7;
+}
+.item .title{
+  margin:20rpx 20rpx;
+  padding-left: 10rpx;
+  border-left: 5rpx solid #ffc506;
+}
+
+.save{
+  margin: 20rpx 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.save .photo{
+  width: 175rpx;
+  height: 175rpx;
+}
+.save .photo image{
+  width: 100%;
+  height: 100%;
+  border-radius: 30rpx;
+}
+
+.moredata{
+  width: 350rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.moredata .name{
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+  font-size: 40rpx;
+  font-weight: bold;
+}
+.txt{
+  font-size: 26rpx;
+  margin-left: 20rpx;
+}
+.txt .zh{
+  color: #8c8c8c;
+}
+.txt .en{
+  color: #cccccc;
+}
+.area{
+  font-size: 32rpx;
+  color: #ff8800;
+  font-weight: bold;
+  margin-left: 10rpx;
+}
+
+.delete{
+  width: 150rpx;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 40rpx;
+  font-weight: bold;
+}

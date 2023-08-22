@@ -5,7 +5,7 @@ Projet for dachuang. Bulid MQTT communication between arm64 facilities. Make a l
 on Linux(Deepin):  
 install git:  
 '$ sudo apt install git-all'  
-on windows you can download installer from >https://git-scm.com/
+on windows you can download installer from (https://git-scm.com/)  
 
 set user:  
 '$ git config --global user.name "your name"'  
@@ -27,6 +27,7 @@ clone DC:
 
 upadte code from remote:  
 '$ git pull'  
+Attention: before each coding, make a pull  
 
 push to DC:  
 '$ git add .'  

@@ -2,7 +2,7 @@
 Projet for dachuang. Bulid MQTT communication between arm64 facilities. Make a lost and found wechat miniprogram, power by this technology.  
 
 ## HOW TO USE GIT 
-on Linux(Deepin):  
+on Linux:  
 install git:  
 '$ sudo apt install git-all'  
 on windows you can download installer from (https://git-scm.com/)  

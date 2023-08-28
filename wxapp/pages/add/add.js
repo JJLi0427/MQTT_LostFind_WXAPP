@@ -1,6 +1,7 @@
 // pages/add/add.js
+var newitem = {}
+newitem.imgsrc = ""
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -21,16 +22,17 @@ Page({
         },
         {
           "id":3,
-          "name":"airpods Pro 2th",
+          "name":"airpods Pro",
           "area":"SX105",
           "photo":"/images/airpods.jpg"
         }
      ],
-     total: 3
-    }
+     total: 3,
+    },
+    imgsrc:'/images/photo.png'
   },
+
   doDeleteRow(e){
-    
     wx.showModal({
       title: '确认是否删除？',
       confirmColor: "#ff461f",
@@ -38,49 +40,59 @@ Page({
         if (!res.confirm) {
           return
         }
-        
         var nid = e.currentTarget.dataset.nid
         var index = e.currentTarget.dataset.index
-        
         var dataList = this.data.mylost.list
         dataList.splice(index,1)
         let total = this.data.mylost.total - 1
-
         wx.showLoading({
           title: '删除中',
           mask:true
         })
-
         this.setData({
           "mylost.list":dataList,
           "mylost.total":total
         })
-        
         wx.hideLoading()
-        // wx.request({
-        //   url: api.bank + nid + '/',
-        //   method:'DELETE',
-        //   success:(res) =>{
-        //     let total = this.data.mylost.total - 1
-        //     if(total <0){
-        //       total = 0
-        //     } 
-        //     this.setData({
-        //       ["mylost.list"]:dataList,
-        //       ["mylost.total"]:total,
-        //     })
-        //   },
-        //   complete() {
-        //     wx.hideLoading()
-        //   }
-        // })
-       
       }
     })
+  },
+  nameinput(e){
+    newitem.name = e.detail.value
+  },
+  areainput(e){
+    newitem.area = e.detail.value
+  },
+  chooseimg(e) {
+		wx.chooseMedia({
+			count: 1, // 最多可以选择的文件个数
+			mediaType: ['image'], // 文件类型
+			sizeType: ['original'], // 是否压缩所选文件
+			sourceType: ['album'], // 可以指定来源是相册还是相机，默认二者都有
+      success: res=>{
+        this.setData({
+          imgsrc:res.tempFiles[0].tempFilePath
+        })
+        newitem.photo = res.tempFiles[0].tempFilePath
+      }
+		})
+  },
+  additem(e){
+    if(newitem.name != "" && newitem.area != ""){
+      let total = this.data.mylost.total + 1
+      this.setData({
+        "mylost.total":total 
+      })
+      newitem.id = total
+      this.setData({
+        "mylost.list": this.data.mylost.list.concat(newitem)
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
+
   onLoad(options) {
 
   },

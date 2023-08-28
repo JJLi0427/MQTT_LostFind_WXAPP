@@ -4,8 +4,8 @@
     <view class="first">我的遗失物品数量</view>
     <view class="sum">{{mylost.total}}</view>
   </view>
-  <view class="function">
-    <navigator class="menu">
+  <!-- <view class="function">
+    <navigator class="menu" url="/pages/new/new">
       <image src="/images/new.png" style="width: 40rpx; height: 40rpx;"></image>
       <view>新增</view>
     </navigator>
@@ -13,7 +13,7 @@
       <image src="/images/all.png" style="width: 40rpx; height: 40rpx;"></image>
       <view>历史</view>
     </navigator>
-  </view>
+  </view> -->
   <view class="table">
     <view class="item">
       <view class="title">失物列表</view>
@@ -40,6 +40,23 @@
         </view>
       </view>
     </view>
- 
+  </view>
+</view>
+<view calss="new">
+  <view class="item">
+      <view class="title">新增失物</view>
+  </view>
+  <view class="row">
+    <input placeholder="物品描述(例：iphone14紫色)" placeholder-class="txt" bindinput="nameinput"/>
+  </view>
+  <view class="row">
+    <input placeholder="丢失位置(例：SY101)" placeholder-class="txt" bindinput="areainput"/>
+  </view>
+  <view class="choose">
+    <!-- <view bindtap="chooseimg" class="btn">选择图片</view> -->
+    <image src="{{imgsrc}}" mode='aspectFit' class="choosepthoto" bindtap="chooseimg">点击选择图片</image>
+  </view>
+  <view>
+    <button class="submit" bindtap="additem" style="width:25%">添加</button>
   </view>
 </view>

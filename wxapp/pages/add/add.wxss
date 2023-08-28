@@ -102,3 +102,42 @@
   font-size: 40rpx;
   font-weight: bold;
 }
+
+
+.row{
+  padding: 10rpx 0rpx;
+  border-bottom: 1rpx solid #ddd;
+  position: relative;
+  margin-top: 50rpx;
+  margin-left: 100rpx;
+  margin-right: 100rpx;
+}
+.choose{
+  text-align: center;
+}
+.choosepthoto{
+  margin: 50rpx 0;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 20rpx;
+}
+.btn {
+	background-color: #ffc506;
+	padding: 20rpx 20rpx;
+	color: #fff;
+  border-radius: 20rpx;
+  margin-top: 50rpx;
+  margin-bottom: 10rpx;
+  margin-left: 230rpx;
+  margin-right: 230rpx;
+  font-weight: bold;
+}
+.submit{
+  bottom: 40rpx;
+  border-radius: 20rpx;
+  margin: 50rpx;
+  color: #fff;
+  background-color: #ff8800;
+  font-size: 32rpx;
+  font-weight: bold;
+}

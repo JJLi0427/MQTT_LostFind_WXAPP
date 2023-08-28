@@ -2,7 +2,7 @@
 <view class="container">
   <navigator class="menu" url="/pages/add/add">
     <image src="/images/1.png" style="width:100rpx; height:100rpx"></image>
-    <view>失物登记</view>
+    <view>我的失物</view>
   </navigator>
   <navigator class="menu">
     <image src="/images/2.png" style="width:100rpx; height:100rpx"></image>

@@ -9,8 +9,20 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/new/new",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
+  },
+  "projectname": "wxapp",
+  "setting": {
+    "compileHotReLoad": true,
+    "useIsolateContext": false
   }
 }

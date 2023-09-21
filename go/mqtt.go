@@ -9,10 +9,10 @@ import (
 
 func main() {
 	// Create an MQTT client instance
-	opts := MQTT.NewClientOptions().AddBroker("43.142.90.79:1883")
-	opts.SetClientID("mqtt-client")
-	opts.SetUsername("t1")
-	opts.SetPassword("1234556")
+	opts := MQTT.NewClientOptions().AddBroker("13.208.206.214:1883")
+	opts.SetClientID("Goclient")
+	//opts.SetUsername("t1")
+	//opts.SetPassword("1234556")
 	// Set the message handler for receiving messages
 	opts.SetDefaultPublishHandler(func(client MQTT.Client, msg MQTT.Message) {
 		go func() {

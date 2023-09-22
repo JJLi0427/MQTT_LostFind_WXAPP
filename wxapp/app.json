@@ -2,7 +2,8 @@
   "pages": [
     "pages/home/home",
     "pages/one/one",
-    "pages/add/add"
+    "pages/add/add",
+    "pages/stats/stats"
   ],
   "tabBar": {
     "selectedColor": "#b4282d",

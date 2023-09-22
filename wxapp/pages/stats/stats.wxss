@@ -1,0 +1,44 @@
+/* pages/stats/stats.wxss */
+
+.top{
+  background-color: #ffe605;
+  height: 150rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color:black;
+}
+
+.top .first{
+  font-size: 40rpx;
+  font-weight: 900;
+}
+
+.news{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.container .menu{
+  width: 750rpx;
+  height: 300rpx;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .last{
+  width: 750rpx;
+  height: 180rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

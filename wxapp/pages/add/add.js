@@ -1,4 +1,5 @@
 // pages/add/add.js
+import mqtt from "../../utils/mqtt.min.js";
 var newitem = {}
 newitem.imgsrc = ""
 Page({

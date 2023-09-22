@@ -23,6 +23,7 @@
   "projectname": "wxapp",
   "setting": {
     "compileHotReLoad": true,
-    "useIsolateContext": false
+    "useIsolateContext": false,
+    "urlCheck": false
   }
 }

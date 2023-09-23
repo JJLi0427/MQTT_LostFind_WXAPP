@@ -8,11 +8,11 @@
     <image src="/images/2.png" style="width:100rpx; height:100rpx"></image>
     <view>寻得物品</view>
   </navigator>
-  <navigator class="menu">
+  <navigator class="menu" url="/pages/stats/stats">
     <image src="/images/3.png" style="width:100rpx; height:100rpx"></image>
     <view>全部统计</view>
   </navigator>
   <view class="last">
     <image src="/images/4.jpg" style="width:180rpx; height:180rpx"></image>
-</view>
+  </view>
 </view>

@@ -1,0 +1,26 @@
+<!--pages/stats/stats.wxml-->
+<view class="container">
+  <view class="top">
+    <view class="first">今日消息</view>
+  </view>
+  <view class="news">
+      <text>♦️最新消息：</text>
+    <text>恭喜{{user.list[0].username}}同学找回物品</text>
+  </view>
+
+  <view class="menu">
+    <text class="">共计已找到</text>
+    <view class="found">
+    </view>
+  </view>
+  <view class="menu"> 
+    <text>今日有{{}}同学已找到物品</text>
+  </view>
+  <view class="menu">
+    <view>在线活跃人数{{}}人</view>
+  </view>
+  
+  <view class="last">
+    <image src="/images/4.jpg" style="width:180rpx; height:180rpx"></image>
+  </view>
+</view>

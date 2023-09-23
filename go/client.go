@@ -27,7 +27,7 @@ func main() {
 	
 
 	// 订阅主题
-	topics := []string{"lost", "find"}
+	topics := []string{"lost", "find", "exit", "error"}
 	for _, topic := range topics {
 		if token := client.Subscribe(topic, 0, messageHandler); token.Wait() && token.Error() != nil {
 			log.Fatal(token.Error())

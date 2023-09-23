@@ -13,6 +13,7 @@ func main() {
 	var server string = "lostfind.cn:1883"
 	opts := MQTT.NewClientOptions().AddBroker(server)
 	opts.SetClientID("Goclient")
+	opts.SetWill("error", "disconnect", 0, false) // 设置 Last Will 和 Testament，修改 "topic" 和 "offline" 为你想设置的主题和消息
 	//opts.SetUsername("t1")
 	//opts.SetPassword("1234556")
 	// Set the message handler for receiving messages
@@ -28,7 +29,7 @@ func main() {
 	}
 
 	// 连接成功
-	fmt.Println("Connected to MQTT server: "+server)
+	fmt.Println("Connected to MQTT server: " + server)
 
 	// Maintain a subscription list
 	subscriptions := make(map[string]byte)
@@ -82,8 +83,16 @@ func main() {
 			delete(subscriptions, topic)
 			fmt.Printf("Unsubscribed from topic: %s\n", topic)
 		case "4":
-			// Exit the program
+			// Exit the program without sending Last Will
 			fmt.Println("Program exited")
+			
+			topic := "exit" // 修改为你设置的主题
+			message := "offline" // 修改为你想发送的下线消息
+			qos := byte(0) // 设置 QoS
+			if token := client.Publish(topic, qos, false, message); token.Wait() && token.Error() != nil {
+				log.Fatal(token.Error())
+			}
+			
 			client.Disconnect(250)
 			return
 		default:

@@ -11,7 +11,7 @@ import (
 func main() {
 	// 创建MQTT客户端连接配置
 	opts := mqtt.NewClientOptions()
-	opts.AddBroker("13.208.206.214:1883") // 设置MQTT代理服务器地址
+	opts.AddBroker("lostfind.cn:1883") // 设置MQTT代理服务器地址
 	opts.SetClientID("Goclient")
 
 	// 创建MQTT客户端

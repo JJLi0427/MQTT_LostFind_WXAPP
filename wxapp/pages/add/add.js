@@ -30,7 +30,8 @@ Page({
      ],
      total: 3,
     },
-    imgsrc:'/images/photo.png'
+    imgsrc:'/images/photo.png',
+    client: null
   },
 
   doDeleteRow(e){
@@ -88,6 +89,20 @@ Page({
       this.setData({
         "mylost.list": this.data.mylost.list.concat(newitem)
       })
+      const clientId = new Date().getTime()
+      this.data.client = mqtt.connect(`wxs://lostfind.cn:8084/mqtt`, {
+        ...this.data.mqttOptions,
+        clientId,
+      })
+      if (this.data.client) {
+        this.data.client.publish("lost",newitem.name+","+newitem.area);
+        //return;
+        wx.showToast({
+          title: "发送成功",
+        })
+      }
+      this.data.client.end()
+      this.data.client = null
     }
   },
   /**

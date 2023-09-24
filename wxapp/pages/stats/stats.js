@@ -5,8 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    user:{
-      list:[      //后面加上数据库需要重新定向最新的添加进来的人
+    user: {
+      list: [      //后面加上数据库需要重新定向最新的添加进来的人
         {         //因为我们不确定最新的是否为第一个，也许可以加一个新的标注               
           "id":1, //金程需要添加一个计数在jsonresponse里
           "username": "lijj",
@@ -15,8 +15,11 @@ Page({
           "photo":"/images/airpods.jpg"
         }
      ],
-     total: 3,
+     totalUser: 3,
+     activeNumber: 0,
     },
+    todayFound: 0,
+    totalFound: 0
   },
 
   /**

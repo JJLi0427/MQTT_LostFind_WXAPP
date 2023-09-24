@@ -3,7 +3,8 @@
     "pages/home/home",
     "pages/one/one",
     "pages/add/add",
-    "pages/stats/stats"
+    "pages/stats/stats",
+    "pages/found/found"
   ],
   "tabBar": {
     "selectedColor": "#b4282d",

@@ -9,15 +9,13 @@
   </view>
 
   <view class="menu">
-    <text class="">共计已找到</text>
-    <view class="found">
-    </view>
+    <text class="">共计已找到{{totalFound}}件物品</text>
   </view>
   <view class="menu"> 
-    <text>今日有{{}}同学已找到物品</text>
+    <text>今日已找到{{todayFound}}件物品</text>
   </view>
   <view class="menu">
-    <view>在线活跃人数{{}}人</view>
+    <view>在线活跃人数{{user.activeNumber}}人</view>
   </view>
   
   <view class="last">

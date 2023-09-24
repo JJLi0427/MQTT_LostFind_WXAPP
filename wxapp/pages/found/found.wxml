@@ -1,8 +1,8 @@
-<!--pages/add/add.wxml-->
+<!--pages/found/found.wxml-->
 <view class="container">
   <view class="top">
-    <view class="first">我的遗失物品数量</view>
-    <view class="sum">{{mylost.total}}</view>
+    <view class="first">已找回的物品数量</view>
+    <view class="sum">{{found.totalFound}}</view>
   </view>
   <!-- <view class="function">
     <navigator class="menu" url="/pages/new/new">
@@ -35,29 +35,35 @@
             </view>
           </view>
         </view>
-        <view class="delete" bindtap="doDeleteRow" data-nid="{{row.id}}" data-index="{{index}}" >
-          <label>🗑️</label>
+        <view class="delete" bindtap="FindTheRow" data-nid="{{row.id}}" data-index="{{index}}" >
+          <label>✅</label>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="table">
+    <view class="item">
+      <view class="title">已找回物品列表</view>
+    </view>
+    <view class="item" wx:for="{{found.list}}" wx:for-item="row" wx:key="index">
+      <view class="save">
+        <view class="photo">
+          <image src="{{row.photo}}" mode='aspectFit'></image>
+        </view>
+        <view class="moredata">
+          <view class="name">{{row.name}}</view>
+          <view>
+            <view class="txt">
+              <lable class="zh">找回位置</lable>
+              <label class="en">| AREA</label>
+            </view>
+            <view class="area">
+              <label class="area">@{{row.area}}</label>
+            </view>
+          </view>
         </view>
       </view>
     </view>
   </view>
 </view>
 
-<view calss="new">
-  <view class="item">
-      <view class="title">新增失物</view>
-  </view>
-  <view class="row">
-    <input placeholder="物品描述(例：iphone14紫色)" placeholder-class="txt" bindinput="nameinput"/>
-  </view>
-  <view class="row">
-    <input placeholder="丢失位置(例：SY101)" placeholder-class="txt" bindinput="areainput"/>
-  </view>
-  <view class="choose">
-    <!-- <view bindtap="chooseimg" class="btn">选择图片</view> -->
-    <image src="{{imgsrc}}" mode='aspectFit' class="choosepthoto" bindtap="chooseimg">点击选择图片</image>
-  </view>
-  <view>
-    <button class="submit" bindtap="additem" style="width:25%">添加</button>
-  </view>
-</view>

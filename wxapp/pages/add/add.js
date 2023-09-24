@@ -101,9 +101,15 @@ Page({
           title: "发送成功",
         })
       }
-      this.data.client.end()
-      this.data.client = null
+      setTimeout(()=>{
+        this.data.client.end();
+        this.data.client = null;
+      },1000)
     }
+  },
+  disconnect() {
+    this.data.client.end();
+    this.data.client = null;
   },
   /**
    * 生命周期函数--监听页面加载

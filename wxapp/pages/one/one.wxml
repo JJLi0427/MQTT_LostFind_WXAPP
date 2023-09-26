@@ -1,2 +1,34 @@
 <!--pages/one/one.wxml-->
-<text bindtap="getnews">MY</text>
+<view class="container">
+  <view class="top">
+    <view class="first">我的信息</view>
+  </view>
+
+  <view class="menu"> 
+    <view>
+      <image src="{{imagePath}}" style="height:200rpx;width:200rpx;"></image>
+    </view>
+  </view>
+
+  <view class="menu">
+    <view class="msg">
+      <view>用户名: {{name}}</view>
+      <view>学号：{{account}}</view>
+      <view>地址：{{address}}</view>
+    </view>
+  </view>
+
+  <view class="menu">
+    <button bindtap="getUser">信息登记</button>
+    <input placeholder="输入学号：xxxxxxx" placeholder-class="txt" bindinput="accountInput"/>
+    <input placeholder="输入地址：xxxxxxx" placeholder-class="txt" bindinput="addressInput"/>
+    <view>
+    <button class="submit" bindtap="updateMsg">更新信息</button>
+  </view>
+  </view>
+  
+  <view class="last">
+    <image src="/images/4.jpg" style="width:180rpx; height:180rpx"></image>
+  </view>
+
+</view>

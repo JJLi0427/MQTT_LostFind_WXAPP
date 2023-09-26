@@ -1,7 +1,62 @@
 /* pages/one/one.wxss */
 
+.top{
+  background-color: #ffe605;
+  height: 150rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color:white;
+}
+
+.top .first{
+  font-size: 50rpx;
+  font-weight: 800;
+}
+
+.news{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.container .menu{
+  width: 750rpx;
+  height: 300rpx;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .last{
+  width: 750rpx;
+  height: 180rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .box{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+.msg{
+  font-size: 30rpx;
+  font-weight: 400;
+}
+
+.submit{
+  border-radius: 10rpx;
+  color: #fff;
+  background-color: #ff8800;
+  font-size: 32rpx;
+  font-weight: bold;
 }

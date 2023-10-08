@@ -2,17 +2,22 @@
 
 .top{
   background-color: #ffe605;
-  height: 150rpx;
+  height: 200rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   color:black;
 }
-
 .top .first{
-  font-size: 40rpx;
+  font-size: 55rpx;
   font-weight: 900;
+  color:rgb(255, 255, 255);
+}
+.top .sum{
+  font-size: 32rpx;
+  font-weight: 800;
+  color:rgb(255, 255, 255);
 }
 
 .news{
@@ -24,10 +29,29 @@
   font-weight: 600;
 }
 
-.container .menu{
+
+.container .menu1{
+  background-color: #ffec45;
   width: 750rpx;
   height: 300rpx;
-  border-bottom: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.container .menu2{
+  background-color: #fff280;
+  width: 750rpx;
+  height: 300rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.container .menu3{
+  background-color: #fffac5;
+  width: 750rpx;
+  height: 300rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,4 +65,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.first{
+  font-size: 30rpx;
+  font-weight: 500;
+}
+.sum{
+  font-size: 45rpx;
+  padding: 15rpx;
+  font-weight: 900;
 }

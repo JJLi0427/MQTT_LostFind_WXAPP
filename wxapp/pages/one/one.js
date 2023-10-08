@@ -6,9 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    name: "张三",
-    account: "XXXXXXXX",
-    imagePath: "/images/blank.png",
+    name: "伍六七",
+    account: "21288888",
+    imagePath: "/images/one.png",
     address: "北下关月考大学"
   },
 

@@ -15,16 +15,17 @@ Page({
           "photo":"/images/airpods.jpg"
         }
      ],
-     totalUser: 3,
-     activeNumber: 0,
+     totalUser: 100,
+     activeNumber: 10,
     },
-    todayFound: 0,
-    totalFound: 0
+    todayFound: 2,
+    totalFound: 123,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
+
   onLoad(options) {
 
   },

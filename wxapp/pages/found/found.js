@@ -15,13 +15,13 @@ Page({
           "id":1,
           "name":"iPhone 12",
           "area":"SY101",
-          "photo":"/images/iphone.jpg"
+          "photo":"/images/iphone12.jpg"
         },
         {
           "id":2,
-          "name":"green t3",
+          "name":"apple watch",
           "area":"YF412",
-          "photo":"/images/airpods.jpg"
+          "photo":"/images/watch.jpg"
         },
      ],
      totalFound: 2,

@@ -54,7 +54,7 @@
           <view class="name">{{row.name}}</view>
           <view>
             <view class="txt">
-              <lable class="zh">找回位置</lable>
+              <lable class="zh">遗失位置</lable>
               <label class="en">| AREA</label>
             </view>
             <view class="area">

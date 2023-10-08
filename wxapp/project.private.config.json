@@ -16,6 +16,20 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/stats/stats",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/one/one",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

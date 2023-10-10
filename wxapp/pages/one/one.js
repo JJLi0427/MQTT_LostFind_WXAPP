@@ -1,53 +1,12 @@
 // pages/one/one.js
-var newMsg = {}
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    name: "伍六七",
-    account: "21288888",
-    imagePath: "/images/one.png",
-    address: "北下关月考大学"
-  },
 
-  getUser:function() {
-    let outer = this;
-    wx.getUserInfo({
-      success: function (res) {
-        console.log('success', res)
-        outer.setData({
-          name: res.userInfo.nickName,
-          imagePath: res.userInfo.avatarUrl,
-        });
-      },
-      fail: function(res) {
-        console.log('fail', res)
-      }
-    })
   },
-
-  accountInput(e){
-    newMsg.account = e.detail.value
-  },
-
-  addressInput(e){
-    newMsg.address = e.detail.value
-  },
-
-  updateMsg(e){
-    if(newMsg.account != "" && newMsg.address != "") {
-      this.setData({
-        "account": newMsg.account,
-        "address": newMag.address,
-      })
-      wx.showToast({
-        title: "更新成功",
-      },)
-    }
-  },
-
 
   /**
    * 生命周期函数--监听页面加载

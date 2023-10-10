@@ -42,7 +42,6 @@
     </view>
   </view>
 </view>
-
 <view calss="new">
   <view class="item">
       <view class="title">新增失物</view>

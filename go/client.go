@@ -22,7 +22,7 @@ func main() {
 
 	// 接收消息的回调函数
 	messageHandler := func(client mqtt.Client, msg mqtt.Message) {
-		fmt.Printf("接收到主题[%s]的消息: %s\n", msg.Topic(), msg.Payload())
+		fmt.Printf("Recevie topic[%s]  message: %s\n", msg.Topic(), msg.Payload())
 	}
 	
 
@@ -32,7 +32,7 @@ func main() {
 		if token := client.Subscribe(topic, 0, messageHandler); token.Wait() && token.Error() != nil {
 			log.Fatal(token.Error())
 		}
-		fmt.Printf("已订阅主题: %s\n", topic)
+		fmt.Printf("Subscribe: %s\n", topic)
 	}
 
 	// 等待消息处理

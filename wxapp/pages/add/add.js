@@ -13,19 +13,22 @@ Page({
           "id":1,
           "name":"iPhone 14 ProMax",
           "area":"SY201",
-          "photo":"/images/iphone.jpg"
+          "photo":"/images/iphone.jpg",
+          "phoneNumber": ""
         },
         {
           "id":2,
           "name":"Macbook Pro 15'",
           "area":"YF312",
-          "photo":"/images/macbook.jpg"
+          "photo":"/images/macbook.jpg",
+          "phoneNumber": ""
         },
         {
           "id":3,
           "name":"airpods Pro",
           "area":"SX105",
-          "photo":"/images/airpods.jpg"
+          "photo":"/images/airpods.jpg",
+          "phoneNumber": ""
         }
      ],
      total: 3,
@@ -65,6 +68,10 @@ Page({
   areainput(e){
     newitem.area = e.detail.value
   },
+  setPhoneNumber(e){
+    // 需要运用数据库发来的信息
+    // 在addttem里面调用
+  },
   chooseimg(e) {
 		wx.chooseMedia({
 			count: 1, // 最多可以选择的文件个数
@@ -80,7 +87,7 @@ Page({
 		})
   },
   additem(e){
-    if(newitem.name != "" && newitem.area != ""){
+    if(newitem.name != "" && newitem.area != "" && newitem.phoneNumber != ""){
       let total = this.data.mylost.total + 1
       this.setData({
         "mylost.total":total 

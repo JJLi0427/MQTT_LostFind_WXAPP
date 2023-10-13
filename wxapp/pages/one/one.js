@@ -7,8 +7,8 @@ Page({
   data: {
     name: "伍六七",
     account: "21288888",
+    phoneNumber: "1888288888",
     imagePath: "/images/one.png",
-    address: "北下关月考大学"
   },
 
   getUser:function() {
@@ -26,21 +26,26 @@ Page({
       }
     })
   },
+  nameInput(e){
+    newMsg.name = e.detail.value
+  },
   accountInput(e){
     newMsg.account = e.detail.value
   },
-  addressInput(e){
-    newMsg.address = e.detail.value
+  phoneNumberInput(e){
+    // console.log("Phone Number Input: " + e.detail.value)
+    newMsg.phoneNumber = e.detail.value
   },
   updateMsg(e){
-    if(newMsg.account != "" && newMsg.address != "") {
+    if(newMsg.account != "" && newMsg.name != "" && newMsg.phoneNumber != "") {
       this.setData({
         "account": newMsg.account,
-        "address": newMag.address,
+        "name": newMsg.name,
+        "phoneNumber": newMsg.phoneNumber,
       })
       wx.showToast({
         title: "更新成功",
-      },)
+      })
     }
   },
   /**

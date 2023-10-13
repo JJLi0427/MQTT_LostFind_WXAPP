@@ -4,20 +4,20 @@
     <image src="{{imagePath}}" class="avatar" mode='aspectFit'></image>
       <view>姓名: {{name}}</view>
       <view>学号：{{account}}</view>
-      <view>手机：12345678901</view>
+      <view>手机：{{phoneNumber}}</view>
   </view>
   <view>
       <button class="submit" bindtap="getUser" style="width:30%">获取信息</button>
   </view>
   <view class="menu1">
     <view class="row">
-      <input placeholder="更新姓名" placeholder-class="txt" bindinput="accountInput"/>
+      <input placeholder="更新姓名" placeholder-class="txt" bindinput="nameInput"/>
     </view>
     <view class="row">
-      <input placeholder="更新学号" placeholder-class="txt" bindinput="addressInput"/>
+      <input placeholder="更新学号" placeholder-class="txt" bindinput="accountInput"/>
     </view>
     <view class="row">
-      <input placeholder="更新手机" placeholder-class="txt" bindinput="addressInput"/>
+      <input placeholder="更新手机" placeholder-class="txt" bindinput="phoneNumberInput"/>
     </view>
     <view>
     <view>

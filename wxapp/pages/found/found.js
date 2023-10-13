@@ -15,13 +15,17 @@ Page({
           "id":1,
           "name":"iPhone 12",
           "area":"SY101",
-          "photo":"/images/iphone12.jpg"
+          "photo":"/images/iphone12.jpg",
+          "userName": "lijj",
+          "phoneNumber": "18888888888"
         },
         {
           "id":2,
           "name":"apple watch",
           "area":"YF412",
-          "photo":"/images/watch.jpg"
+          "photo":"/images/watch.jpg",
+          "userName": "lijj",
+          "phoneNumber": "18888888888"
         },
      ],
      totalFound: 2,
@@ -32,19 +36,25 @@ Page({
           "id":1,
           "name":"iPhone 14 ProMax",
           "area":"SY201",
-          "photo":"/images/iphone.jpg"
+          "photo":"/images/iphone.jpg",
+          "userName": "lijj",
+          "phoneNumber": "18888888888"
         },
         {
           "id":2,
           "name":"Macbook Pro 15'",
           "area":"YF312",
-          "photo":"/images/macbook.jpg"
+          "photo":"/images/macbook.jpg",
+          "userName": "lijj",
+          "phoneNumber": "18888888888"
         },
         {
           "id":3,
           "name":"airpods Pro",
           "area":"SX105",
-          "photo":"/images/airpods.jpg"
+          "photo":"/images/airpods.jpg",
+          "userName": "lijj",
+          "phoneNumber": "18888888888"
         }
      ],
      totalLost: 3,
@@ -52,6 +62,21 @@ Page({
   },
 
   FindTheRow(e){
+    var index = e.currentTarget.dataset.index;
+    var foundItem = this.data.found.list[index];
+    var phoneNumber = foundItem.phoneNumber;
+    var name = foundItem.userName;
+
+    wx.showModal({
+      title: '请联系',
+      content: '请联系 ' + name + '（+86）' + phoneNumber,
+      confirmColor: "#ff461f",
+      success: (res) => {
+        if (!res.confirm) {
+          return
+        }
+      }
+    })
     wx.showModal({
       title: '是否已找回？',
       confirmColor: "#ff461f",
@@ -77,9 +102,7 @@ Page({
           'found.list': findList,
           'found.totalFound': totalFound
         });
-        
-        
-    
+   
         wx.showLoading({
           title: '处理中',
           mask:true

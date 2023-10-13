@@ -4,11 +4,11 @@
     <image src="/images/1.png" style="width:100rpx; height:100rpx"></image>
     <view>我的失物</view>
   </navigator>
-  <navigator class="menu">
+  <navigator class="menu"  url="/pages/found/found">
     <image src="/images/2.png" style="width:100rpx; height:100rpx"></image>
     <view>寻得物品</view>
   </navigator>
-  <navigator class="menu">
+  <navigator class="menu" url="/pages/stats/stats">
     <image src="/images/3.png" style="width:100rpx; height:100rpx"></image>
     <view>全部统计</view>
   </navigator>

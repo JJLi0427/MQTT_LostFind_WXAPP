@@ -21,7 +21,7 @@
     </view>
     <view>
     <view>
-      <button class="submit" bindtap="updateMsg" style="width:100%">更新信息</button>
+      <button class="submit" bindtap="updateMsg" style="width:30%">更新信息</button>
     </view>
   </view>
   </view>

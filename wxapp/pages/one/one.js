@@ -7,7 +7,7 @@ Page({
   data: {
     name: "伍六七",
     account: "21288888",
-    phoneNumber: "1888288888",
+    phoneNumber: "12345678901",
     imagePath: "/images/one.png",
   },
 

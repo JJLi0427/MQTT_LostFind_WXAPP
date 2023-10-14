@@ -16,7 +16,7 @@ Page({
           "name":"iPhone 12",
           "area":"SY101",
           "photo":"/images/iphone12.jpg",
-          "userName": "lijj",
+          "userName": "LJJ",
           "phoneNumber": "18888888888"
         },
         {
@@ -24,7 +24,7 @@ Page({
           "name":"apple watch",
           "area":"YF412",
           "photo":"/images/watch.jpg",
-          "userName": "lijj",
+          "userName": "LJJ",
           "phoneNumber": "18888888888"
         },
      ],
@@ -69,7 +69,7 @@ Page({
 
     wx.showModal({
       title: '请联系',
-      content: '请联系 ' + name + '（+86）' + phoneNumber,
+      content: name + ': (+86)' + phoneNumber,
       confirmColor: "#ff461f",
       success: (res) => {
         if (!res.confirm) {

@@ -49,8 +49,8 @@ for linux `GOOS=linux GOARCH=arm64 GOARM=7 go build -o xxx xxx.go` or `GOOS=linu
 Download develop tool form <https://mp.weixin.qq.com/>, scan the QR code to login.  
 Import the wxapp floder to open the project, use local develop to open it.  
 
-1. ***wxapp/page*** floder contains all pages, each page need ***.wxml .wxss .js*** three files to complie.  
-2. ***app.js/app.json/app.wxss*** are global UI or data setting for this program.  
+1. ***wxapp/page***  floder contains all pages, each page need  ***.wxml .wxss .js***  three files to complie.  
+2. ***app.js/app.json/app.wxss***  are global UI or data setting for this program.  
 3. Chage the coompile setting to compile the page you are developing at first.  
 4. Use real machine debugging when finish coding.  
 

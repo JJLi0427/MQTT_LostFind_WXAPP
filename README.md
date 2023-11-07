@@ -25,13 +25,20 @@ Clone DC to your computer:
 `$ git clone git@github.com:JJLi0427/DC.git`  
 
 Upadte code from remote:  
+`$ git fetch` + `$ git diff` to compare  
 `$ git pull`  
 Attention: before each coding, make a pull  
 
 Push to DC:  
 `$ git add .`  
 `$ git commit`  
-`$ git push origin main`
+`$ git push origin/main`  
+ro only use`$ git commit -am "message"`  
+
+Use branch:  
+`$ git branch "branchname"`  
+`$ git checkout "branchname"`  
+`$ git merge "branchname"`  
 
 ## ABOUT GO
 Go mod is a module management tool, it contains the source of your import file.  

@@ -1,6 +1,7 @@
 // pages/stats/stats.js
+const mqtt = require("../../utils/mqtt.min.js");
+let client = null;
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -27,14 +28,48 @@ Page({
    */
 
   onLoad(options) {
+    let that = this;
+    wx.request({
+      url:"http://121.43.238.224:8520/api/sutffcount",
+      success:(res) => {
+        that.setData({
+          totalFound: res.data.data[0].sutffcount
+        })
+      },
+      fail:(err) => {console.log(err);}
+    })
+    wx.request({
+      url:"http://121.43.238.224:8520/api/usercount",
+      success:(res) => {
+        that.setData({
+          "user.totalUser": res.data.data[0].usercount
+        })
+      },
+      fail:(err) => {console.log(err);}
+    })
 
+
+    //mqtt code
+    client = mqtt.connect("wxs://121.43.238.224:8084/mqtt");
+    client.on('connect',() => {
+    });
+    client.subscribe('wx/todayFound', {
+      qos: 0
+    }, (err) => {
+      if (!err) {
+        console.log("订阅成功")
+      }
+    });
+    client.on('message', (topic, message) => {
+      if (topic.toString() == "wx/todayFound")
+        this.setData({todayFound : this.data.todayFound + 1});
+    });
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-
   },
 
   /**
@@ -48,14 +83,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide() {
-
+    client.end();
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
-
+    client = null;
   },
 
   /**

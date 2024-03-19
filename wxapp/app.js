@@ -26,6 +26,7 @@ App({
         }
      ],
      total: 3
-    }
+    },
+    username: ""
   }
 })

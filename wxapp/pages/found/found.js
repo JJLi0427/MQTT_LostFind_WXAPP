@@ -32,30 +32,30 @@ Page({
     },
     mylost:{
       list:[
-        {
-          "id":1,
-          "name":"iPhone 14 ProMax",
-          "area":"SY201",
-          "photo":"/images/iphone.jpg",
-          "userName": "lijj",
-          "phoneNumber": "18888888888"
-        },
-        {
-          "id":2,
-          "name":"Macbook Pro 15'",
-          "area":"YF312",
-          "photo":"/images/macbook.jpg",
-          "userName": "lijj",
-          "phoneNumber": "18888888888"
-        },
-        {
-          "id":3,
-          "name":"airpods Pro",
-          "area":"SX105",
-          "photo":"/images/airpods.jpg",
-          "userName": "lijj",
-          "phoneNumber": "18888888888"
-        }
+        // {
+        //   "id":1,
+        //   "name":"iPhone 14 ProMax",
+        //   "area":"SY201",
+        //   "photo":"/images/iphone.jpg",
+        //   "userName": "lijj",
+        //   "phoneNumber": "18888888888"
+        // },
+        // {
+        //   "id":2,
+        //   "name":"Macbook Pro 15'",
+        //   "area":"YF312",
+        //   "photo":"/images/macbook.jpg",
+        //   "userName": "lijj",
+        //   "phoneNumber": "18888888888"
+        // },
+        // {
+        //   "id":3,
+        //   "name":"airpods Pro",
+        //   "area":"SX105",
+        //   "photo":"/images/airpods.jpg",
+        //   "userName": "lijj",
+        //   "phoneNumber": "18888888888"
+        // }
      ],
      totalLost: 3,
     },
@@ -63,13 +63,13 @@ Page({
 
   FindTheRow(e){
     var index = e.currentTarget.dataset.index;
-    var foundItem = this.data.found.list[index];
-    var phoneNumber = foundItem.phoneNumber;
+    var foundItem = this.data.mylost.list[index];
+    var phone = foundItem.phoneNumber;
     var name = foundItem.userName;
 
     wx.showModal({
       title: '请联系',
-      content: name + ': (+86)' + phoneNumber,
+      content: name + ': (+86)' + phone,
       confirmColor: "#ff461f",
       success: (res) => {
         if (!res.confirm) {
@@ -85,6 +85,17 @@ Page({
           return
         }
         var nid = e.currentTarget.dataset.nid;
+        wx.request({
+          url:"http://121.43.238.224:8520/api/found",
+          method:"POST",
+          data:{id:nid},
+          success:(res) => {
+            console.log(res.data.data);
+          },
+          fail:(err) => {console.log(err);}
+        })
+
+        
         var index = e.currentTarget.dataset.index;
         var dataList = this.data.mylost.list;
         var findList = this.data.found.list;
@@ -103,17 +114,17 @@ Page({
           'found.totalFound': totalFound
         });
    
-        wx.showLoading({
-          title: '处理中',
-          mask:true
-        })
-        this.setData({
-          "mylost.list":dataList,
-          "mylost.totalLost":totalLost,
-          "found.list": findList,
-          "found.totalFound": totalFound
-        })
-        wx.hideLoading()
+        // wx.showLoading({
+        //   title: '处理中',
+        //   mask:true
+        // })
+        // this.setData({
+        //   "mylost.list":dataList,
+        //   "mylost.totalLost":totalLost,
+        //   "found.list": findList,
+        //   "found.totalFound": totalFound
+        // })
+        // wx.hideLoading()
       }
     })
   },
@@ -135,7 +146,39 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    let that = this;
+    wx.request({
+      url:"http://121.43.238.224:8520/api/sutffbytype",
+      method:"POST",
+      // data:{nm:"Jiajun Li"},
+      data:{tp:"lost"},
+      success:(res) => {
+        //静态用户数据绑定
+        res.data.data.forEach(function(value,index,data){
+          value.userName = "LJJ";
+          value.phoneNumber = "18888888888";
+          console.log("value:",value,"index:",index,"data:",data);
+        });
+        //------
+        that.setData({
+          "mylost.list": res.data.data,
+          "mylost.total": res.data.data.length
+        })
+      },
+      fail:(err) => {console.log(err);}
+    })
+    wx.request({
+      url:"http://121.43.238.224:8520/api/sutffbytype",
+      method:"POST",
+      data:{tp:"find"},
+      success:(res) => {
+        that.setData({
+          "found.list": res.data.data,
+          "found.totalFound": res.data.data.length
+        })
+      },
+      fail:(err) => {console.log(err);}
+    })
   },
 
   /**

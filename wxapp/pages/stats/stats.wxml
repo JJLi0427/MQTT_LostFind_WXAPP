@@ -10,7 +10,7 @@
     <view class="sum">{{totalFound}}件</view>
   </view>
   <view class="menu2"> 
-    <view class="first">今日找回数量</view>
+    <view class="first">实时新增失物</view>
     <view class="sum">{{todayFound}}件</view>
   </view>
   <view class="menu3">

@@ -1,13 +1,14 @@
 // pages/one/one.js
+const app = getApp()
 var newMsg = {}
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    name: "伍六七",
-    account: "21288888",
-    phoneNumber: "12345678901",
+    name: "",
+    account: "",
+    phoneNumber: "",
     imagePath: "/images/one.png",
   },
 
@@ -52,6 +53,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    let that = this;
+    wx.request({
+      url:"http://121.43.238.224:8520/api/user",
+      method:"POST",
+      data:{
+        fn:13538082049
+      },
+      success:(res) => {
+        that.setData({
+          account: res.data.data[0].studentid,
+          name: res.data.data[0].username,
+          phoneNumber: res.data.data[0].phonenumber
+        }),
+        app.globalData.username = res.data.data[0].username
+      },
+      fail:(err) => {
+        console.log(err);
+      }
+    }),
+    console.log(app.globalData.username)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

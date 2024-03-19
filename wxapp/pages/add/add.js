@@ -1,5 +1,7 @@
 // pages/add/add.js
 import mqtt from "../../utils/mqtt.min.js";
+const app = getApp()
+console.log(app.globalData.username)
 var newitem = {}
 newitem.imgsrc = ""
 Page({
@@ -23,20 +25,19 @@ Page({
           "photo":"/images/macbook.jpg",
           "phoneNumber": ""
         },
-        {
-          "id":3,
-          "name":"airpods Pro",
-          "area":"SX105",
-          "photo":"/images/airpods.jpg",
-          "phoneNumber": ""
-        }
+        // {
+        //   "id":3,
+        //   "name":"airpods Pro",
+        //   "area":"SX105",
+        //   "photo":"/images/airpods.jpg",
+        //   "phoneNumber": ""
+        // }
      ],
      total: 3,
     },
     imgsrc:'/images/photo.png',
     client: null
   },
-
   doDeleteRow(e){
     wx.showModal({
       title: '确认是否删除？',
@@ -45,7 +46,20 @@ Page({
         if (!res.confirm) {
           return
         }
-        var nid = e.currentTarget.dataset.nid
+        var nid = e.currentTarget.dataset.nid;
+        let that = this;
+        wx.request({
+          url:"http://121.43.238.224:8520/api/sutffdel",
+          method:"POST",
+          data:{id:nid},
+          success:(res) => {
+            console.log(res);
+          },
+          fail:(err) => {
+            console.log(err);
+          }
+        })
+
         var index = e.currentTarget.dataset.index
         var dataList = this.data.mylost.list
         dataList.splice(index,1)
@@ -96,6 +110,7 @@ Page({
       this.setData({
         "mylost.list": this.data.mylost.list.concat(newitem)
       })
+      //MQTT publish demo
       const clientId = new Date().getTime()
       this.data.client = mqtt.connect(`wxs://lostfind.cn:8084/mqtt`, {
         ...this.data.mqttOptions,
@@ -112,6 +127,18 @@ Page({
         this.data.client.end();
         this.data.client = null;
       },1000)
+    let that = this;
+    wx.request({
+      url:"http://121.43.238.224:8520/api/sutffadd",
+      method:"POST",
+      data:{uname:app.globalData.username,name:newitem.name,area:newitem.area,photo:"/images/photo.png"},
+      success:(res) => {
+        console.log(res);
+      },
+      fail:(err) => {
+        console.log(err);
+      }
+    })
     }
   },
   disconnect() {
@@ -123,14 +150,29 @@ Page({
    */
 
   onLoad(options) {
-
+    let that = this;
+    wx.request({
+      url:"http://121.43.238.224:8520/api/sutff",
+      method:"POST",
+      data:{
+        nm:"Jiajun Li"
+      },
+      success:(res) => {
+        that.setData({
+          "mylost.list": res.data.data,
+          "mylost.total": res.data.data.length
+        })
+      },
+      fail:(err) => {
+        console.log(err);
+      }
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-
   },
 
   /**

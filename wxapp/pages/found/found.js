@@ -1,5 +1,5 @@
 // pages/found/found.js
-
+import mqtt from "../../utils/mqtt.min.js";
 var newitem = {}
 newitem.imgsrc = ""
 
@@ -11,72 +11,25 @@ Page({
   data: {
     found:{
       list:[
-        {
-          "id":1,
-          "name":"iPhone 12",
-          "area":"SY101",
-          "photo":"/images/iphone12.jpg",
-          "userName": "LJJ",
-          "phoneNumber": "18888888888"
-        },
-        {
-          "id":2,
-          "name":"apple watch",
-          "area":"YF412",
-          "photo":"/images/watch.jpg",
-          "userName": "LJJ",
-          "phoneNumber": "18888888888"
-        },
+
      ],
-     totalFound: 2,
+     totalFound: "",
     },
     mylost:{
       list:[
-        // {
-        //   "id":1,
-        //   "name":"iPhone 14 ProMax",
-        //   "area":"SY201",
-        //   "photo":"/images/iphone.jpg",
-        //   "userName": "lijj",
-        //   "phoneNumber": "18888888888"
-        // },
-        // {
-        //   "id":2,
-        //   "name":"Macbook Pro 15'",
-        //   "area":"YF312",
-        //   "photo":"/images/macbook.jpg",
-        //   "userName": "lijj",
-        //   "phoneNumber": "18888888888"
-        // },
-        // {
-        //   "id":3,
-        //   "name":"airpods Pro",
-        //   "area":"SX105",
-        //   "photo":"/images/airpods.jpg",
-        //   "userName": "lijj",
-        //   "phoneNumber": "18888888888"
-        // }
+
      ],
-     totalLost: 3,
+     totalLost: 0,
     },
+    client: null,
   },
 
   FindTheRow(e){
     var index = e.currentTarget.dataset.index;
     var foundItem = this.data.mylost.list[index];
-    var phone = foundItem.phoneNumber;
-    var name = foundItem.userName;
+    var phone = ""
+    var name = ""
 
-    wx.showModal({
-      title: '请联系',
-      content: name + ': (+86)' + phone,
-      confirmColor: "#ff461f",
-      success: (res) => {
-        if (!res.confirm) {
-          return
-        }
-      }
-    })
     wx.showModal({
       title: '是否已找回？',
       confirmColor: "#ff461f",
@@ -84,18 +37,54 @@ Page({
         if (!res.confirm) {
           return
         }
-        var nid = e.currentTarget.dataset.nid;
+        var nid = e.currentTarget.dataset.nid;    
         wx.request({
-          url:"http://121.43.238.224:8520/api/found",
+          url:"http://121.43.238.224:8520/api/lostuser",
           method:"POST",
           data:{id:nid},
           success:(res) => {
-            console.log(res.data.data);
-          },
-          fail:(err) => {console.log(err);}
+            console.log(res)
+          }
         })
-
-        
+        wx.request({
+          url:"http://121.43.238.224:8520/api/getphone",
+          method:"POST",
+          data:{user:name},
+          success:(res) => {
+            phone = res
+          }
+        })
+        // wx.request({
+        //   url:"http://121.43.238.224:8520/api/found",
+        //   method:"POST",
+        //   data:{id:nid},
+        //   success:(res) => {
+        //     console.log(res.data.data);
+        //   },
+        //   fail:(err) => {console.log(err);}
+        // })
+        const clientId = new Date().getTime()
+        this.data.client = mqtt.connect(`wxs://lostfind.cn:8084/mqtt`, {
+          ...this.data.mqttOptions,
+          clientId,
+        })
+        if (this.data.client) {
+          this.data.client.publish("find",String(nid));
+        }
+        setTimeout(()=>{
+          this.data.client.end();
+          this.data.client = null;
+        },1000)
+        wx.showModal({
+          title: '请联系',
+          content: name + ': (+86)' + phone,
+          confirmColor: "#ff461f",
+          success: (res) => {
+            if (!res.confirm) {
+              return
+            }
+          }
+        })
         var index = e.currentTarget.dataset.index;
         var dataList = this.data.mylost.list;
         var findList = this.data.found.list;

@@ -6,22 +6,19 @@
       <view>学号：{{account}}</view>
       <view>手机：{{phoneNumber}}</view>
   </view>
-  <view>
-      <button class="submit" bindtap="getUser" style="width:30%">获取信息</button>
-  </view>
   <view class="menu1">
     <view class="row">
-      <input placeholder="更新姓名" placeholder-class="txt" bindinput="nameInput"/>
+      <input placeholder="姓名" placeholder-class="txt" bindinput="nameInput"/>
     </view>
     <view class="row">
-      <input placeholder="更新学号" placeholder-class="txt" bindinput="accountInput"/>
+      <input placeholder="学号" placeholder-class="txt" bindinput="accountInput"/>
     </view>
     <view class="row">
-      <input placeholder="更新手机" placeholder-class="txt" bindinput="phoneNumberInput"/>
+      <input placeholder="手机" placeholder-class="txt" bindinput="phoneNumberInput"/>
     </view>
     <view>
     <view>
-      <button class="submit" bindtap="updateMsg" style="width:30%">更新信息</button>
+      <button class="submit" bindtap="updateMsg" style="width:30%">登录平台</button>
     </view>
   </view>
   </view>

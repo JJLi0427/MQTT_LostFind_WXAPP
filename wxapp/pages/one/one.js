@@ -13,19 +13,7 @@ Page({
   },
 
   getUser:function() {
-    let outer = this;
-    wx.getUserInfo({
-      success: function (res) {
-        console.log('success', res)
-        outer.setData({
-          name: res.userInfo.nickName,
-          imagePath: res.userInfo.avatarUrl,
-        });
-      },
-      fail: function(res) {
-        console.log('fail', res)
-      }
-    })
+
   },
   nameInput(e){
     newMsg.name = e.detail.value
@@ -39,40 +27,38 @@ Page({
   },
   updateMsg(e){
     if(newMsg.account != "" && newMsg.name != "" && newMsg.phoneNumber != "") {
-      this.setData({
-        "account": newMsg.account,
-        "name": newMsg.name,
-        "phoneNumber": newMsg.phoneNumber,
-      })
-      wx.showToast({
-        title: "更新成功",
+      let that = this;
+      wx.request({
+        url:"http://121.43.238.224:8520/api/user",
+        method:"POST",
+        data:{
+          f_id:newMsg.account,
+          f_name:newMsg.name,
+          f_phone:newMsg.phoneNumber
+        },
+        success:(res) => {
+          that.setData({
+            account: res.data.data[0].studentid,
+            name: res.data.data[0].username,
+            phoneNumber: res.data.data[0].phonenumber
+          }),
+          wx.showToast({
+            title: "登录成功",
+          }),
+          app.globalData.uname = newMsg.name;
+        },
+        fail:(err) => {
+          console.log(err);
+        },
       })
     }
+    console.log("name:"+app.globalData.uname)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    let that = this;
-    wx.request({
-      url:"http://121.43.238.224:8520/api/user",
-      method:"POST",
-      data:{
-        fn:13538082049
-      },
-      success:(res) => {
-        that.setData({
-          account: res.data.data[0].studentid,
-          name: res.data.data[0].username,
-          phoneNumber: res.data.data[0].phonenumber
-        }),
-        app.globalData.username = res.data.data[0].username
-      },
-      fail:(err) => {
-        console.log(err);
-      }
-    }),
-    console.log(app.globalData.username)
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

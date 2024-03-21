@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"strconv"
 	"strings"
 	"time"
 
@@ -52,20 +53,35 @@ func main() {
 	messageHandler := func(client mqtt.Client, msg mqtt.Message) {
 		fmt.Printf("Recevie topic[%s]  message: %s\n", msg.Topic(), msg.Payload())
 		payload := string(msg.Payload())
-		parts := strings.Split(payload, ",")
-		if len(parts) == 4 {
-			user := parts[0]
-			datatype := "lost"
-			name := parts[1]
-			area := parts[2]
-			photo := parts[3]
+		if msg.Topic() == "lost" {
+			parts := strings.Split(payload, ",")
+			if len(parts) == 4 {
+				user := parts[0]
+				datatype := "lost"
+				name := parts[1]
+				area := parts[2]
+				photo := parts[3]
 
-			// 插入数据到数据库
-			_, err := db.Exec("INSERT INTO wxapp (username, type, name, area, photo) VALUES (?, ?, ?, ?, ?)", user, datatype, name, area, photo)
+				// 插入数据到数据库
+				_, err := db.Exec("INSERT INTO sutff (username, type, name, area, photo) VALUES (?, ?, ?, ?, ?)", user, datatype, name, area, photo)
+				if err != nil {
+					log.Fatal(err)
+				}
+				fmt.Printf("Lost stuff add to wxapp {User: %s, Name: %s, Area: %s}\n", user, name, area)
+			}
+		}
+		if msg.Topic() == "find" {
+			id, err := strconv.Atoi(payload)
 			if err != nil {
 				log.Fatal(err)
 			}
-			fmt.Printf("Lost stuff add to wxapp {User: %s, Name: %s, Area: %s}\n", user, name, area)
+
+			// 更新数据库中的数据
+			_, err = db.Exec("UPDATE sutff SET type = ? WHERE id = ?", "find", id)
+			if err != nil {
+				log.Fatal(err)
+			}
+			fmt.Printf("Stuff with id %d has been marked as found\n", id)
 		}
 		if msg.Topic() == "exit" {
 			fmt.Printf("    remot-eclient log out safely.\n")

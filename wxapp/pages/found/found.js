@@ -22,14 +22,13 @@ Page({
      totalLost: 0,
     },
     client: null,
+    phone : "phone",
+    name : "name"
   },
 
   FindTheRow(e){
     var index = e.currentTarget.dataset.index;
     var foundItem = this.data.mylost.list[index];
-    var phone = ""
-    var name = ""
-
     wx.showModal({
       title: '是否已找回？',
       confirmColor: "#ff461f",
@@ -43,17 +42,34 @@ Page({
           method:"POST",
           data:{id:nid},
           success:(res) => {
-            console.log(res)
+            this.setData({
+              name: res.data.data[0].username
+            }, () => {
+              wx.request({
+                url:"http://121.43.238.224:8520/api/getphone",
+                method:"POST",
+                data:{user:this.data.name},
+                success:(res) => {
+                  this.setData({
+                    phone: res.data.data[0].phonenumber
+                  }, () => {
+                    wx.showModal({
+                      title: '请联系',
+                      content: this.data.name + ': (+86)' + this.data.phone,
+                      confirmColor: "#ff461f",
+                      success: (res) => {
+                        if (!res.confirm) {
+                          return
+                        }
+                      }
+                    })
+                  })
+                }
+              })
+            });
           }
         })
-        wx.request({
-          url:"http://121.43.238.224:8520/api/getphone",
-          method:"POST",
-          data:{user:name},
-          success:(res) => {
-            phone = res
-          }
-        })
+
         // wx.request({
         //   url:"http://121.43.238.224:8520/api/found",
         //   method:"POST",
@@ -75,16 +91,7 @@ Page({
           this.data.client.end();
           this.data.client = null;
         },1000)
-        wx.showModal({
-          title: '请联系',
-          content: name + ': (+86)' + phone,
-          confirmColor: "#ff461f",
-          success: (res) => {
-            if (!res.confirm) {
-              return
-            }
-          }
-        })
+
         var index = e.currentTarget.dataset.index;
         var dataList = this.data.mylost.list;
         var findList = this.data.found.list;
@@ -143,11 +150,11 @@ Page({
       data:{tp:"lost"},
       success:(res) => {
         //静态用户数据绑定
-        res.data.data.forEach(function(value,index,data){
-          value.userName = "LJJ";
-          value.phoneNumber = "18888888888";
-          console.log("value:",value,"index:",index,"data:",data);
-        });
+        // res.data.data.forEach(function(value,index,data){
+        //   value.userName = "LJJ";
+        //   value.phoneNumber = "18888888888";
+        //   console.log("value:",value,"index:",index,"data:",data);
+        // });
         //------
         that.setData({
           "mylost.list": res.data.data,

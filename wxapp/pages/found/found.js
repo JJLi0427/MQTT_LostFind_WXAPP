@@ -109,18 +109,6 @@ Page({
           'found.list': findList,
           'found.totalFound': totalFound
         });
-   
-        // wx.showLoading({
-        //   title: '处理中',
-        //   mask:true
-        // })
-        // this.setData({
-        //   "mylost.list":dataList,
-        //   "mylost.totalLost":totalLost,
-        //   "found.list": findList,
-        //   "found.totalFound": totalFound
-        // })
-        // wx.hideLoading()
       }
     })
   },
@@ -149,13 +137,6 @@ Page({
       // data:{nm:"Jiajun Li"},
       data:{tp:"lost"},
       success:(res) => {
-        //静态用户数据绑定
-        // res.data.data.forEach(function(value,index,data){
-        //   value.userName = "LJJ";
-        //   value.phoneNumber = "18888888888";
-        //   console.log("value:",value,"index:",index,"data:",data);
-        // });
-        //------
         that.setData({
           "mylost.list": res.data.data,
           "mylost.total": res.data.data.length

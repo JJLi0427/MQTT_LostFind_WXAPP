@@ -1,69 +1,57 @@
-# DC
-Projet for dachuang. Bulid MQTT communication between arm64 facilities. Make a lost and found wechat miniprogram, power by this technology.  
+# A Lost and Find WXAPP Base on MQTT Communication 
+![GitHub watchers](https://img.shields.io/github/watchers/JJLi0427/MQTT_LostFind_wxapp)
+![GitHub Repo stars](https://img.shields.io/github/stars/JJLi0427/MQTT_LostFind_wxapp)
+![GitHub forks](https://img.shields.io/github/forks/JJLi0427/MQTT_LostFind_wxapp)
 
-## HOW TO USE GIT 
-On Linux how to install git:  
-`$ sudo apt install git-all`  
-on windows you can download installer from <https://git-scm.com/>  
+### Contributors
+<a href="https://github.com/JJLi0427/MQTT_LostFind_wxapp/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=JJLi0427/MQTT_LostFind_wxapp" />
+</a>
 
-Set user:  
-`$ git config --global user.name "your name"`  
-`$ git config --global user.email "your_email@youremail.com"`  
+### Menu
+- [English Introduction](##Introduction)
+- [中文介绍](##中文简介)
+- [Dependencies](##Dependencise)
+- [Quick start](##Quick-start)
+- [Todo](##Todo)
+- [License](##License)
 
-SSH to github:  
-`$ ssh-keygen -t rsa`  
-`$ cd ~/.ssh`  
-`$ cat id_rsa.pub`  
+## Introduction
+We are a group of students from Beijing Jiaotong University aiming to develop a campus lost and found mini program. Having recognized the lightweight, convenient, and secure nature of the MQTT communication protocol, we have chosen to build our project around it. Currently, we have successfully crafted a comprehensive mini program interface and interactive logic. For the communication related to lost and found items, we have developed a communication client using Go language to interact with the backend database effectively.
 
-Then copy the link and past on your github->setting->SSH.  
+### Project Structure
 
-Test the link to github:  
-`$ ssh -T git@github.com`  
+### Database Design
 
-Clone DC to your computer:  
-`$ cd ~/.Desktop`  
-`$ git clone git@github.com:JJLi0427/DC.git`  
+### MQTT Communication
 
-Upadte code from remote:  
-`$ git fetch` + `$ git diff` to compare  
-`$ git pull`  
-Attention: before each coding, make a pull  
+### WXAPP Design
 
-Push to DC:  
-`$ git add .`  
-`$ git commit`  
-`$ git push origin/main`  
-ro only use`$ git commit -am "message"`  
+## 中文简介
 
-Use branch:  
-`$ git branch "branchname"`  
-`$ git checkout "branchname"`  
-`$ git merge "branchname"`  
+### 架构设计
 
-## ABOUT GO
-Go mod is a module management tool, it contains the source of your import file.  
-How to make a mod:  
-`go mod init xxx`  
+### 数据库
 
-Run go application with go mod:  
-`go run ./xxx.go`  
+### MQTT通信
 
-Buid code for arm platform:  
-for windows `GOOS=windows GOARCH=amd64 go build -o xxx xxx.go`  
-for linux `GOOS=linux GOARCH=arm64 GOARM=7 go build -o xxx xxx.go` or `GOOS=linux GOARCH=arm GOARM=7 go build -o xxx xxx.go`
+### 小程序设计
 
-## ABOUT WXAPP
-Download develop tool form <https://mp.weixin.qq.com/>, scan the QR code to login.  
-Import the wxapp floder to open the project, use local develop to open it.  
+## Dependencise
+1. We choose MySQL as our project database
+2. Use DBAIPI for WXAPP on load and some page on show
+3. Use a js MQTT project help WXAPP connect the go client
 
-1. ***wxapp/page*** floder contains all pages, each page need ***.wxml .wxss .js*** three files to complie.  
-2. ***app.js app.json app.wxss*** are global UI or data setting for this program.  
-3. Chage the coompile setting to compile the page you are developing at first.  
-4. Use real machine debugging when finish coding.  
+## Quick start
+Build go MQTT clinet from source code client.go and run it:
+```bash
+GOOS={$YOUR_SYSTEM} GOARCH={$YOUR_CPU} go build client.go -o clinet
+./clinet
+```
+Load WXAPP project through wechat developer application:
+## Todo
+1. -[ ] WXAPP implements online user registration
+2. -[ ] Fix some bug
 
-## HOW TO USE VSCODE TO REMOTE DEVELOP
-Read this bolg and learn using vscode to connect server through SSH   
-<https://blog.csdn.net/lijj0304/article/details/132559126?spm=1001.2014.3001.5502>
-
-
-## WXAPP使用
+## License
+This project is licensed under the [MIT License](https://opensource.org/license/MIT) - see the [LICENSE.txt](https://github.com/JJLi0427/MQTT_LostFind_wxapp/blob/main/LICENSE.txt) file for details.

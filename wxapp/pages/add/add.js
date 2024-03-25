@@ -27,7 +27,6 @@ Page({
           return
         }
         var nid = e.currentTarget.dataset.nid;
-        let that = this;
         wx.request({
           url:"http://121.43.238.224:8520/api/sutffdel",
           method:"POST",
@@ -109,7 +108,6 @@ Page({
         this.data.client.end();
         this.data.client = null;
       },1000)
-    let that = this;
     // wx.request({
     //   url:"http://121.43.238.224:8520/api/sutffadd",
     //   method:"POST",

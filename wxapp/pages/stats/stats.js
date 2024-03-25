@@ -1,26 +1,18 @@
 // pages/stats/stats.js
-const mqtt = require("../../utils/mqtt.min.js");
-let client = null;
 Page({
   /**
    * 页面的初始数据
    */
   data: {
     user: {
-      list: [      //后面加上数据库需要重新定向最新的添加进来的人
-        {         //因为我们不确定最新的是否为第一个，也许可以加一个新的标注               
-          "id":1, //金程需要添加一个计数在jsonresponse里
-          "username": "lijj",
-          "name":"airpods Pro",
-          "area":"SX105",
-          "photo":"/images/airpods.jpg"
-        }
+      list: [
+        
      ],
-     totalUser: 100,
-     activeNumber: 10,
+     totalUser: 0,
+     activeNumber: 0,
     },
-    todayFound: 2,
-    totalFound: 123,
+    todayFound: 0,
+    totalFound: 0,
   },
 
   /**
@@ -47,23 +39,6 @@ Page({
       },
       fail:(err) => {console.log(err);}
     })
-
-
-    //mqtt code
-    client = mqtt.connect("wxs://121.43.238.224:8084/mqtt");
-    client.on('connect',() => {
-    });
-    client.subscribe('wx/todayFound', {
-      qos: 0
-    }, (err) => {
-      if (!err) {
-        console.log("订阅成功")
-      }
-    });
-    client.on('message', (topic, message) => {
-      if (topic.toString() == "wx/todayFound")
-        this.setData({todayFound : this.data.todayFound + 1});
-    });
   },
 
   /**
@@ -83,14 +58,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide() {
-    client.end();
+    
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
-    client = null;
+    
   },
 
   /**

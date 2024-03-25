@@ -82,7 +82,8 @@ Page({
 		})
   },
   additem(e){
-    if(newitem.name != "" && newitem.area != "" && newitem.phoneNumber != ""){
+    if(newitem.name != "" && newitem.area != "" && newitem.phoneNumber != "" && app.globalData.uname != "app"){
+      console.log(app.globalData.uname);
       let total = this.data.mylost.total + 1
       this.setData({
         "mylost.total":total 

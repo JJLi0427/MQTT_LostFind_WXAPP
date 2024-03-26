@@ -80,7 +80,7 @@ Page({
         //   fail:(err) => {console.log(err);}
         // })
         const clientId = new Date().getTime()
-        this.data.client = mqtt.connect(`wxs://lostfind.cn:8084/mqtt`, {
+        this.data.client = mqtt.connect(`wxs://101.201.100.189:8084/mqtt`, {
           ...this.data.mqttOptions,
           clientId,
         })

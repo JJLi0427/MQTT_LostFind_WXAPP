@@ -1,4 +1,4 @@
-# A Lost and Find WXAPP Base on MQTT Communication 
+![image](https://github.com/JJLi0427/MQTT_LostFind_wxapp/assets/133590809/7a21a1f9-a1ca-4930-97d7-b4a306f5227a)# A Lost and Find WXAPP Base on MQTT Communication 
 ![GitHub watchers](https://img.shields.io/github/watchers/JJLi0427/MQTT_LostFind_wxapp)
 ![GitHub Repo stars](https://img.shields.io/github/stars/JJLi0427/MQTT_LostFind_wxapp)
 ![GitHub forks](https://img.shields.io/github/forks/JJLi0427/MQTT_LostFind_wxapp)
@@ -34,7 +34,17 @@ We are a group of students from Beijing Jiaotong University aiming to develop a 
 ### 数据库
 
 ### MQTT通信
-
+1. 设计目标：
+   用于物联网中，提高信息传递的安全以及效率。
+2. 连接模式：
+   MQTT采用轻量级的发布/订阅模式，客户端可以订阅特定的主题，服务器发布消息时，所有订阅了该主题的客户端都会收到消息。
+3. 效率：
+   MQTT比DBAPI更加高效。
+4. 安全性：
+   在wxapp中，丢失物品和找到物品的操作这两个关键信息用MQTT传递，保证了数据传输的安全性。
+6. 客户端开发：
+   go语言客户端自带高并发，性能好。
+   总而言之，在物联网应用中，MQTT是更优的选择。
 ### 小程序设计
 
 ## Dependencise

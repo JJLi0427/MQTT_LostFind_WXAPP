@@ -1,0 +1,19 @@
+{
+    "database server":{
+        "host":"",
+        "port":3306,
+        "user":"",
+        "password":"",
+        "database":""
+    },
+    "mqtt server":{
+        "host":"",
+        "port":1883,
+        "topic":[
+            "lost", 
+            "find", 
+            "exit", 
+            "error"
+        ]
+    }
+}

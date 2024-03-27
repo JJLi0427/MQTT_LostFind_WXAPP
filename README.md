@@ -1,9 +1,9 @@
 # A Lost and Find WXAPP Base on MQTT Communication 
 <div style="display:flex;">
   <img src="https://github.com/JJLi0427/MQTT_LostFind_WXAPP/assets/112649584/cc003934-f94b-47cd-b077-490bdcc4f28b" style="width:20%;">
-  <img src="https://github.com/JJLi0427/MQTT_LostFind_WXAPP/assets/112649584/902bb7d2-b87d-4559-a12c-d7cd6ed9e0cf" style="width:18%;">
+  <img src="https://github.com/JJLi0427/MQTT_LostFind_WXAPP/assets/112649584/902bb7d2-b87d-4559-a12c-d7cd6ed9e0cf" style="width:16%;">
   <img src="https://github.com/JJLi0427/MQTT_LostFind_WXAPP/assets/112649584/4ee4251f-2bea-4d31-b44d-8796e06ce8aa" style="width:20%;">
-  <img src="https://github.com/JJLi0427/MQTT_LostFind_WXAPP/assets/112649584/902bb7d2-b87d-4559-a12c-d7cd6ed9e0cf" style="width:18%;">
+  <img src="https://github.com/JJLi0427/MQTT_LostFind_WXAPP/assets/112649584/902bb7d2-b87d-4559-a12c-d7cd6ed9e0cf" style="width:16%;">
   <img src="https://github.com/JJLi0427/MQTT_LostFind_WXAPP/assets/112649584/542e9391-0a9b-4fce-ac33-8754bc45bf4f" style="width:20%;">
 </div>
 

@@ -67,17 +67,7 @@ In this project, we adopt a front-end and back-end separation approach. The fron
 ### MQTT Communication
 In the Internet of Things communication, MQTT is the first choice of most people, this protocol adopts a publish/subscribe model, only subscribed to a specific topic can receive a specific message, all communication is based on the MQTT server to do the relay, which improves the security and transmission efficiency. Based on this, we develop a communication client between the Lost and Found Mini Program and the back-end database, receive the subscribed messages and then operate the database, so that we can ensure the security of information release and the efficiency of communication on campus.    
 #### *An example of our MQTT client runtime*
-```shell
-Successfully connected to the database.
-Subscribe: lost
-Subscribe: find
-Subscribe: exit
-Subscribe: error
-Recevie topic[lost]  message: Jiajunli,airpods,yf101,/images/photo.png
-Lost stuff add to wxapp {User: Jiajunli, Name: airpods, Area: yf101}
-Recevie topic[find]  message: 57
-Stuff with id 57 has been marked as found
-```
+<img src="./display/mqttclient.gif" width="50%"> 
 
 ### WXAPP Design
 ![Interface Design](./display/wxappdesign.jpg)
@@ -125,19 +115,20 @@ Stuff with id 57 has been marked as found
 
 ## Quick start
 1. Clone our repo or download our release code
-2. Modify the code, use your database server and MQTT server IP/domain name
+2. `cd ./go` modify `config.json`, input your database and MQTT server configuration
 3. Build go MQTT clinet from source code client.go and run it:
 ```shell
-cd ./go
 go mod init client
 go mod tidy
-GOOS={$YOUR_SYSTEM} GOARCH={$YOUR_CPU} go build client.go -o {$EXE_FILE_NAME}
+GOOS={$YOUR_SYSTEM} GOARCH={$YOUR_CPU} go build -o {$EXE_FILE_NAME} -ldflags '-w -s' ./*.go
 ./{$EXE_FILE_NAME}
 ```
 4. Load WXAPP project through [Weixin DevTools](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
+5. Change the IP and Port part of the WXAPP code
 ## Todo
-1. -[ ] WXAPP implements online user registration
-2. -[ ] WXAPP realize lost items'photo upload
+1. -[x] ~~Optimized the MQTT client architecture and runs based on configuration files~~
+2. -[ ] WXAPP implements online user registration
+3. -[ ] WXAPP realize lost items'photo upload
 
 ## License
 This project is licensed under the [MIT License](https://opensource.org/license/MIT) - see the [LICENSE.txt](https://github.com/JJLi0427/MQTT_LostFind_wxapp/blob/main/LICENSE.txt) file for details.

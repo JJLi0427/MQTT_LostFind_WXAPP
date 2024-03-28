@@ -9,11 +9,8 @@
     "mqtt server":{
         "host":"",
         "port":1883,
-        "topic":[
-            "lost", 
-            "find", 
-            "exit", 
-            "error"
+        "other_topic":[
+            
         ]
     }
 }

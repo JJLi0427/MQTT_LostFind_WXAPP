@@ -1,2 +1,5 @@
 *.wxml linguist-language=html
 *.wxss linguist-language=css
+*.mod linguist-language=go
+*.sum linguist-language=go
+

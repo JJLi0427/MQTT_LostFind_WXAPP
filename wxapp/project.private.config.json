@@ -22,7 +22,7 @@
   },
   "projectname": "wxapp",
   "setting": {
-    "compileHotReLoad": true,
+    "compileHotReLoad": false,
     "useIsolateContext": false,
     "urlCheck": false
   }

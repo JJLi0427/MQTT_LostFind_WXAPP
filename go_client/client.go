@@ -9,7 +9,6 @@ import (
 	"os"
 	"os/signal"
 	"sync"
-	"time"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 	_ "github.com/go-sql-driver/mysql"
@@ -90,20 +89,26 @@ func waitForInterrupt(ctx context.Context, db *sql.DB, client mqtt.Client) {
 	log.Println("Disconnected successfully.")
 }
 
-func main() {
-	// 获取当前时间的字符串表示
-	timestamp := time.Now().Format("20060102150405") // 时间格式为 "YYYYMMDDHHMMSS"
+// logWriter 是一个自定义的 io.Writer，用于写入日志
+type logWriter struct{}
 
+// Write 实现了 io.Writer 的 Write 方法
+func (lw logWriter) Write(p []byte) (n int, err error) {
 	// 打开日志文件
-	logFile, err := os.OpenFile("client_"+timestamp+".log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	logFile, err := os.OpenFile("client.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
-		log.Fatalf("error opening file: %v", err)
+		return 0, err
 	}
 	defer logFile.Close()
 
-	// 设置日志输出到文件和控制台
+	// 写入日志到文件和控制台
 	mw := io.MultiWriter(os.Stdout, logFile)
-	log.SetOutput(mw)
+	return mw.Write(p)
+}
+
+func main() {
+	// 设置日志输出到自定义的 Writer
+	log.SetOutput(logWriter{})
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel() // 在main函数结束时取消上下文

@@ -3,8 +3,9 @@
 ## Supported Versions
 | Version | Supported          |
 | ------- | ------------------ |
+| v1.2    | :white_check_mark: | 
 | v1.1    | :white_check_mark: | 
-| v1.0    | :white_check_mark: |
+| v1.0    | :x: |
 
 ## Reporting a Vulnerability
 - **Reporting Method**: Please report security vulnerabilities using the GitHub Issues tab.

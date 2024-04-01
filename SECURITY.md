@@ -3,9 +3,11 @@
 ## Supported Versions
 | Version | Supported          |
 | ------- | ------------------ |
+| v1.3    | :white_check_mark: | 
 | v1.2    | :white_check_mark: | 
 | v1.1    | :white_check_mark: | 
 | v1.0    | :x: |
+- Unfortunately, we can't provide security support for v1.0 because it doesn't use the client config.json
 
 ## Reporting a Vulnerability
 - **Reporting Method**: Please report security vulnerabilities using the GitHub Issues tab.

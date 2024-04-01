@@ -132,7 +132,7 @@ GOOS={$YOUR_SYSTEM} GOARCH={$YOUR_CPU} go build -o {$EXE_FILE_NAME} -ldflags '-w
 ## Todo
 1. -[x] ~~Optimized the MQTT client architecture and runs based on configuration files~~
 2. -[ ] WXAPP implements online user registration
-3. -[ ] WXAPP realize lost items'photo upload
+3. -[x] ~~WXAPP realize lost items'photo upload
 
 ## License
 This project is licensed under the [MIT License](https://opensource.org/license/MIT) - see the [LICENSE.txt](https://github.com/JJLi0427/MQTT_LostFind_wxapp/blob/main/LICENSE.txt) file for details.

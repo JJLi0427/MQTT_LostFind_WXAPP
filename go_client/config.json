@@ -1,13 +1,13 @@
 {
     "database server":{
-        "host":"121.43.238.224",
+        "host":"",
         "port":3306,
-        "user":"wxapp",
-        "password":"233666",
-        "database":"wxapp"
+        "user":"",
+        "password":"",
+        "database":""
     },
     "mqtt server":{
-        "host":"101.201.100.189",
+        "host":"",
         "port":1883,
         "other_topic":[
             

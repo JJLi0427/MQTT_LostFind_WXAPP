@@ -52,8 +52,8 @@ func handleFindTopic(payload string, db *sql.DB) {
 	// 更新数据库中的数据
 	dbMutex.Lock()
 	_, err = db.Exec(
-		"UPDATE sutff SET type = ? WHERE id = ?", 
-		"find", 
+		"UPDATE sutff SET type = ? WHERE id = ?",
+		"find",
 		id,
 	)
 	dbMutex.Unlock()
@@ -67,16 +67,16 @@ func handleFindTopic(payload string, db *sql.DB) {
 func handleSignupTopic(payload string, db *sql.DB) {
 	parts := strings.Split(payload, ",")
 	if len(parts) == 4 {
-		userid := parts[0]
-		name := parts[1]
+		studentid := parts[0]
+		username := parts[1]
 		phonenumber := parts[2]
 		dbMutex.Lock()
 
 		// 往数据库中存储新用户信息
 		_, err := db.Exec(
-			"INSERT INTO user (userid, name, phonenumber) VALUES (?, ?, ?)",
-			userid,
-			name,
+			"INSERT INTO user (studentid, username, phonenumber) VALUES (?, ?, ?)",
+			studentid,
+			username,
 			phonenumber,
 		)
 		dbMutex.Unlock()
@@ -85,32 +85,37 @@ func handleSignupTopic(payload string, db *sql.DB) {
 		}
 		log.Printf(
 			"New user add to database {User: %s, Name: %s, Phone: %s}\n",
-			userid,
-			name,
+			studentid,
+			username,
 			phonenumber,
 		)
 	}
 }
 
-
 // 处理接收到的消息
 func handleMessage(client mqtt.Client, msg mqtt.Message, db *sql.DB) {
-	log.Printf("Recevie topic[%s]  message: %s\n", msg.Topic(), msg.Payload())
+	getmsg := string(msg.Payload())
+	if msg.Topic() == "lost" {
+		lastComma := strings.LastIndex(getmsg, ",")
+		if lastComma != -1 {
+			getmsg = getmsg[:lastComma] + ",BASE64(photo)"
+		}
+	}
+	log.Printf("Recevie topic[%s]  message: %s\n", msg.Topic(), getmsg)
 	payload := string(msg.Payload())
-	
+
 	// 根据主题处理消息
 	switch msg.Topic() {
-		case "lost":
-			handleLostTopic(payload, db)
-		case "find":
-			handleFindTopic(payload, db)
-		case "signup":
-			handleSignupTopic(payload, db)
-		case "exit":
-			log.Println("remot-eclient log out safely.")
-		case "error":
-			log.Println("remot-eclient lost connection, please try again later.")
+	case "lost":
+		handleLostTopic(payload, db)
+	case "find":
+		handleFindTopic(payload, db)
+	case "signup":
+		handleSignupTopic(payload, db)
+	case "exit":
+		log.Println("remot-eclient log out safely.")
+	case "error":
+		log.Println("remot-eclient lost connection, please try again later.")
 	}
 	// 可以基于此位置进一步开发，处理更多的主题
 }
-

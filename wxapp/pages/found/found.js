@@ -1,5 +1,6 @@
 // pages/found/found.js
 import mqtt from "../../utils/mqtt.min.js";
+import {Base64} from "../../utils/base64";
 var newitem = {}
 newitem.imgsrc = ""
 
@@ -120,9 +121,13 @@ Page({
       // data:{nm:"Jiajun Li"},
       data:{tp:"lost"},
       success:(res) => {
+        let processedData = res.data.data.map(item => {
+          item.photo = Base64.decode(item.photo);
+          return item;
+        });
         that.setData({
-          "mylost.list": res.data.data,
-          "mylost.total": res.data.data.length
+          "mylost.list": processedData,
+          "mylost.total": processedData.length
         })
       },
       fail:(err) => {console.log(err);}
@@ -132,9 +137,13 @@ Page({
       method:"POST",
       data:{tp:"find"},
       success:(res) => {
+        let processedData = res.data.data.map(item => {
+          item.photo = Base64.decode(item.photo);
+          return item;
+        });
         that.setData({
-          "found.list": res.data.data,
-          "found.totalFound": res.data.data.length
+          "found.list": processedData,
+          "found.totalFound": processedData.length
         })
       },
       fail:(err) => {console.log(err);}

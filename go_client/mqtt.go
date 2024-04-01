@@ -11,6 +11,15 @@ import (
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
 
+// 项目必须的主题
+var extraTopics = []string{
+	"lost", 
+	"find", 
+	"signup", 
+	"exit", 
+	"error",
+}
+
 // 创建MQTT客户端
 func createMqttClient(config Config) mqtt.Client {
 	opts := mqtt.NewClientOptions()
@@ -49,13 +58,9 @@ func subscribeTopics(client mqtt.Client, config Config, db *sql.DB) {
 		go handleMessage(client, msg, db)
 	}
 	// 添加新的主题
-	topics := append(
-		config.MqttServer.Topic,
-		"lost",
-		"find",
-		"exit",
-		"error",
-	)
+    for _, extraTopic := range extraTopics {
+        topics = append(topics, extraTopic)
+    }
 	for _, topic := range topics {
 		token := client.Subscribe(topic, 0, messageHandler)
 		if token.Wait() && token.Error() != nil {

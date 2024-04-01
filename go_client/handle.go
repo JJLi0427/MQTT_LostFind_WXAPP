@@ -19,7 +19,7 @@ func handleLostTopic(payload string, db *sql.DB) {
 		area := parts[2]
 		photo := parts[3]
 		dbMutex.Lock() // 加锁
-		insertIntoDatabase(
+		insertLostitem(
 			db,
 			user,
 			datatype,
@@ -47,6 +47,25 @@ func handleFindTopic(payload string, db *sql.DB) {
 	log.Printf("Lost item with ID:%d has been marked as found\n", id)
 }
 
+// 处理 "signup" 主题的消息
+func handleSignupTopic(payload string, db *sql.DB) {
+	parts := strings.Split(payload, ",")
+	if len(parts) == 4 {
+		userid := parts[0]
+		name := parts[1]
+		phonenumber := parts[2]
+		dbMutex.Lock() // 加锁
+		insertUser(
+			db,
+			userid,
+			name,
+			phonenumber,
+		)
+		dbMutex.Unlock() // 解锁
+	}
+}
+
+
 // 处理接收到的消息
 func handleMessage(client mqtt.Client, msg mqtt.Message, db *sql.DB) {
 	log.Printf("Recevie topic[%s]  message: %s\n", msg.Topic(), msg.Payload())
@@ -56,6 +75,8 @@ func handleMessage(client mqtt.Client, msg mqtt.Message, db *sql.DB) {
 		handleLostTopic(payload, db)
 	case "find":
 		handleFindTopic(payload, db)
+	case "signup":
+		handleSignupTopic(payload, db)
 	case "exit":
 		log.Println("remot-eclient log out safely.")
 	case "error":
@@ -64,7 +85,7 @@ func handleMessage(client mqtt.Client, msg mqtt.Message, db *sql.DB) {
 }
 
 // 往数据库里存储失物信息
-func insertIntoDatabase(
+func insertLostitem(
 	db *sql.DB,
 	user string,
 	datatype string,
@@ -88,5 +109,29 @@ func insertIntoDatabase(
 		user,
 		name,
 		area,
+	)
+}
+
+// 往数据库里存储新用户信息
+func insertUser(
+	db *sql.DB,
+	userid string,
+	name string,
+	phonenumber string,
+) {
+	_, err := db.Exec(
+		"INSERT INTO user (userid, name, phonenumber) VALUES (?, ?, ?)",
+		userid,
+		name,
+		phonenumber,
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Printf(
+		"New user add to database {User: %s, Name: %s, Phone: %s}\n",
+		userid,
+		name,
+		phonenumber,
 	)
 }

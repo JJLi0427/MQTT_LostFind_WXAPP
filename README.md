@@ -43,13 +43,13 @@ In this project, we adopt a front-end and back-end separation approach. The fron
 #### *For lost item*
 | id  | username  | type | name       | area   | photo             |
 |-----|-----------|------|------------|--------|-------------------|
-| 43  | Wuliuqi   | find | huawei     | yf502  | /images/photo.png |
-| 44  | Wuliuqi   | find | computer   | sy321  | /images/photo.png |
-| 46  | Jiajunli  | find | iphone     | sx501  | /images/photo.png |
-| 52  | Jiajunli  | lost | airpods    | yf101  | /images/photo.png |
-| 53  | Jiajunli  | find | watch      | sd206  | /images/photo.png |
-| 54  | longshuo  | find | cup        | sy303  | /images/photo.png |
-| 55  | longshuo  | lost | key        | sy401  | /images/photo.png |   
+| 43  | Wuliuqi   | find | huawei     | yf502  | BASE64(photo) |
+| 44  | Wuliuqi   | find | computer   | sy321  | BASE64(photo) |
+| 46  | Jiajunli  | find | iphone     | sx501  | BASE64(photo) |
+| 52  | Jiajunli  | lost | airpods    | yf101  | BASE64(photo) |
+| 53  | Jiajunli  | find | watch      | sd206  | BASE64(photo) |
+| 54  | longshuo  | find | cup        | sy303  | BASE64(photo) |
+| 55  | longshuo  | lost | key        | sy401  | BASE64(photo) |   
 * `id` each lost item will auto have an id in this table
 * `username` is the woner name of lost property, it help us link to user table
 * `type` means the lost item status
@@ -132,7 +132,7 @@ GOOS={$YOUR_SYSTEM} GOARCH={$YOUR_CPU} go build -o {$EXE_FILE_NAME} -ldflags '-w
 ## Todo
 1. -[x] ~~Optimized the MQTT client architecture and runs based on configuration files~~
 2. -[ ] WXAPP implements online user registration
-3. -[ ] WXAPP realize lost items'photo upload
+3. -[x] ~~WXAPP realize lost items'photo upload
 
 ## License
 This project is licensed under the [MIT License](https://opensource.org/license/MIT) - see the [LICENSE.txt](https://github.com/JJLi0427/MQTT_LostFind_wxapp/blob/main/LICENSE.txt) file for details.

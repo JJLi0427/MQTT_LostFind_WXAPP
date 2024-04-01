@@ -1,12 +1,10 @@
 // pages/add/add.js
 import mqtt from "../../utils/mqtt.min.js";
+import {Base64} from "../../utils/base64";
 var newitem = {}
 var app = getApp()
-newitem.imgsrc = ""
+newitem.photo = ""
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
     mylost:{
       list:[
@@ -14,9 +12,10 @@ Page({
      ],
      total: "",
     },
-    imgsrc:'/images/photo.png',
+    imgsrc:"/images/photo.png",
     client: null,
-    username: "Jiajun Li"
+    username: "Jiajun Li",
+    photo:"",
   },
   doDeleteRow(e){
     wx.showModal({
@@ -62,8 +61,7 @@ Page({
     newitem.area = e.detail.value
   },
   setPhoneNumber(e){
-    // 需要运用数据库发来的信息
-    // 在addttem里面调用
+    
   },
   chooseimg(e) {
 		wx.chooseMedia({
@@ -72,17 +70,20 @@ Page({
 			sizeType: ['original'], // 是否压缩所选文件
 			sourceType: ['album'], // 可以指定来源是相册还是相机，默认二者都有
       success: res=>{
+        // console.log(res.tempFiles[0].tempFilePath)
         this.setData({
-          imgsrc:res.tempFiles[0].tempFilePath
+          imgsrc:res.tempFiles[0].tempFilePath,
         })
-        newitem.photo = res.tempFiles[0].tempFilePath
-        console.log(newitem.photo)
+        newitem.photo = wx.getFileSystemManager().readFileSync(res.tempFiles[0].tempFilePath, 'base64')
       }
 		})
   },
   additem(e){
+    if (newitem.photo == "") {
+      newitem.photo = wx.getFileSystemManager().readFileSync("/images/photo.png", 'base64')
+    }
     if(newitem.name != "" && newitem.area != "" && newitem.phoneNumber != "" && app.globalData.uname != "app"){
-      console.log(app.globalData.uname);
+      // console.log(app.globalData.uname);
       let total = this.data.mylost.total + 1
       this.setData({
         "mylost.total":total 
@@ -98,7 +99,7 @@ Page({
         clientId,
       })
       if (this.data.client) {
-        this.data.client.publish("lost",app.globalData.uname+","+newitem.name+","+newitem.area+","+"/images/photo.png");
+        this.data.client.publish("lost",app.globalData.uname+","+newitem.name+","+newitem.area+","+newitem.photo);
         //return;
         wx.showToast({
           title: "发送成功",
@@ -108,42 +109,22 @@ Page({
         this.data.client.end();
         this.data.client = null;
       },1000)
-    // wx.request({
-    //   url:"http://121.43.238.224:8520/api/sutffadd",
-    //   method:"POST",
-    //   data:{uname:app.globalData.username,name:newitem.name,area:newitem.area,photo:"/images/photo.png"},
-    //   success:(res) => {
-    //     console.log(res);
-    //   },
-    //   fail:(err) => {
-    //     console.log(err);
-    //   }
-    // })
     }
   },
   disconnect() {
     this.data.client.end();
     this.data.client = null;
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
 
   onLoad(options) {
 
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady() {
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow() {
-    console.log("name:"+app.globalData.uname)
+    // console.log("name:"+app.globalData.uname)
     let that = this;
     wx.request({
       url:"http://121.43.238.224:8520/api/sutff",
@@ -152,9 +133,13 @@ Page({
         nm:app.globalData.uname
       },
       success:(res) => {
+        let processedData = res.data.data.map(item => {
+          item.photo = Base64.decode(item.photo);
+          return item;
+        });
         that.setData({
-          "mylost.list": res.data.data,
-          "mylost.total": res.data.data.length
+          "mylost.list": processedData,
+          "mylost.total": processedData.length
         })
       },
       fail:(err) => {
@@ -163,37 +148,22 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
   onHide() {
 
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
   onUnload() {
 
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
   onPullDownRefresh() {
 
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
   onReachBottom() {
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
   onShareAppMessage() {
 
   }

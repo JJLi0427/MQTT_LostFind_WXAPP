@@ -1,13 +1,10 @@
 // pages/found/found.js
 import mqtt from "../../utils/mqtt.min.js";
+import {Base64} from "../../utils/base64";
 var newitem = {}
 newitem.imgsrc = ""
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     found:{
       list:[
@@ -69,16 +66,6 @@ Page({
             });
           }
         })
-
-        // wx.request({
-        //   url:"http://121.43.238.224:8520/api/found",
-        //   method:"POST",
-        //   data:{id:nid},
-        //   success:(res) => {
-        //     console.log(res.data.data);
-        //   },
-        //   fail:(err) => {console.log(err);}
-        // })
         const clientId = new Date().getTime()
         this.data.client = mqtt.connect(`wxs://101.201.100.189:8084/mqtt`, {
           ...this.data.mqttOptions,
@@ -126,9 +113,6 @@ Page({
     }
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad(options) {
     let that = this;
     wx.request({
@@ -137,9 +121,13 @@ Page({
       // data:{nm:"Jiajun Li"},
       data:{tp:"lost"},
       success:(res) => {
+        let processedData = res.data.data.map(item => {
+          item.photo = Base64.decode(item.photo);
+          return item;
+        });
         that.setData({
-          "mylost.list": res.data.data,
-          "mylost.total": res.data.data.length
+          "mylost.list": processedData,
+          "mylost.total": processedData.length
         })
       },
       fail:(err) => {console.log(err);}
@@ -149,60 +137,43 @@ Page({
       method:"POST",
       data:{tp:"find"},
       success:(res) => {
+        let processedData = res.data.data.map(item => {
+          item.photo = Base64.decode(item.photo);
+          return item;
+        });
         that.setData({
-          "found.list": res.data.data,
-          "found.totalFound": res.data.data.length
+          "found.list": processedData,
+          "found.totalFound": processedData.length
         })
       },
       fail:(err) => {console.log(err);}
     })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady() {
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow() {
 
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
   onHide() {
 
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
   onUnload() {
 
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
   onPullDownRefresh() {
 
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
   onReachBottom() {
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
   onShareAppMessage() {
 
   }

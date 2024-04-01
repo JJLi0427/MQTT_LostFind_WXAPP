@@ -18,9 +18,11 @@ func handleLostTopic(payload string, db *sql.DB) {
 		name := parts[1]
 		area := parts[2]
 		photo := parts[3]
+
 		dbMutex.Lock() // 加锁
-		insertLostitem(
-			db,
+		// 往数据库中存储失物信息
+		_, err := db.Exec(
+			"INSERT INTO sutff (username, type, name, area, photo) VALUES (?, ?, ?, ?, ?)",
 			user,
 			datatype,
 			name,
@@ -28,6 +30,15 @@ func handleLostTopic(payload string, db *sql.DB) {
 			photo,
 		)
 		dbMutex.Unlock() // 解锁
+		if err != nil {
+			log.Fatal(err)
+		}
+		log.Printf(
+			"Lost item add to database {User: %s, Name: %s, Area: %s}\n",
+			user,
+			name,
+			area,
+		)
 	}
 }
 
@@ -37,10 +48,15 @@ func handleFindTopic(payload string, db *sql.DB) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	// 更新数据库中的数据
-	dbMutex.Lock() // 加锁
-	_, err = db.Exec("UPDATE sutff SET type = ? WHERE id = ?", "find", id)
-	dbMutex.Unlock() // 解锁
+	dbMutex.Lock()
+	_, err = db.Exec(
+		"UPDATE sutff SET type = ? WHERE id = ?", 
+		"find", 
+		id,
+	)
+	dbMutex.Unlock()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -54,14 +70,25 @@ func handleSignupTopic(payload string, db *sql.DB) {
 		userid := parts[0]
 		name := parts[1]
 		phonenumber := parts[2]
-		dbMutex.Lock() // 加锁
-		insertUser(
-			db,
+		dbMutex.Lock()
+
+		// 往数据库中存储新用户信息
+		_, err := db.Exec(
+			"INSERT INTO user (userid, name, phonenumber) VALUES (?, ?, ?)",
 			userid,
 			name,
 			phonenumber,
 		)
-		dbMutex.Unlock() // 解锁
+		dbMutex.Unlock()
+		if err != nil {
+			log.Fatal(err)
+		}
+		log.Printf(
+			"New user add to database {User: %s, Name: %s, Phone: %s}\n",
+			userid,
+			name,
+			phonenumber,
+		)
 	}
 }
 
@@ -70,68 +97,20 @@ func handleSignupTopic(payload string, db *sql.DB) {
 func handleMessage(client mqtt.Client, msg mqtt.Message, db *sql.DB) {
 	log.Printf("Recevie topic[%s]  message: %s\n", msg.Topic(), msg.Payload())
 	payload := string(msg.Payload())
+	
+	// 根据主题处理消息
 	switch msg.Topic() {
-	case "lost":
-		handleLostTopic(payload, db)
-	case "find":
-		handleFindTopic(payload, db)
-	case "signup":
-		handleSignupTopic(payload, db)
-	case "exit":
-		log.Println("remot-eclient log out safely.")
-	case "error":
-		log.Println("remot-eclient lost connection, please try again later.")
+		case "lost":
+			handleLostTopic(payload, db)
+		case "find":
+			handleFindTopic(payload, db)
+		case "signup":
+			handleSignupTopic(payload, db)
+		case "exit":
+			log.Println("remot-eclient log out safely.")
+		case "error":
+			log.Println("remot-eclient lost connection, please try again later.")
 	}
+	// 可以基于此位置进一步开发，处理更多的主题
 }
 
-// 往数据库里存储失物信息
-func insertLostitem(
-	db *sql.DB,
-	user string,
-	datatype string,
-	name string,
-	area string,
-	photo string,
-) {
-	_, err := db.Exec(
-		"INSERT INTO sutff (username, type, name, area, photo) VALUES (?, ?, ?, ?, ?)",
-		user,
-		datatype,
-		name,
-		area,
-		photo,
-	)
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Printf(
-		"Lost item add to database {User: %s, Name: %s, Area: %s}\n",
-		user,
-		name,
-		area,
-	)
-}
-
-// 往数据库里存储新用户信息
-func insertUser(
-	db *sql.DB,
-	userid string,
-	name string,
-	phonenumber string,
-) {
-	_, err := db.Exec(
-		"INSERT INTO user (userid, name, phonenumber) VALUES (?, ?, ?)",
-		userid,
-		name,
-		phonenumber,
-	)
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Printf(
-		"New user add to database {User: %s, Name: %s, Phone: %s}\n",
-		userid,
-		name,
-		phonenumber,
-	)
-}

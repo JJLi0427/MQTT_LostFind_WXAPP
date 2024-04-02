@@ -1,8 +1,10 @@
 // pages/add/add.js
 import mqtt from "../../utils/mqtt.min.js";
 import {Base64} from "../../utils/base64";
+
 var newitem = {}
 var app = getApp()
+
 newitem.photo = ""
 Page({
   data: {
@@ -17,6 +19,7 @@ Page({
     username: "Jiajun Li",
     photo:"",
   },
+
   doDeleteRow(e){
     wx.showModal({
       title: '确认是否删除？',
@@ -46,6 +49,9 @@ Page({
           title: '删除中',
           mask:true
         })
+        setTimeout(function () {
+          wx.hideLoading()
+        }, 1000)        
         this.setData({
           "mylost.list":dataList,
           "mylost.total":total
@@ -54,15 +60,15 @@ Page({
       }
     })
   },
+
   nameinput(e){
     newitem.name = e.detail.value
   },
+
   areainput(e){
     newitem.area = e.detail.value
   },
-  setPhoneNumber(e){
-    
-  },
+  
   chooseimg(e) {
 		wx.chooseMedia({
 			count: 1, 
@@ -78,6 +84,7 @@ Page({
       }
 		})
   },
+
   additem(e){
     if (newitem.photo == "") {
       newitem.photo = wx.getFileSystemManager().readFileSync("/images/photo.png", 'base64')
@@ -113,9 +120,6 @@ Page({
 
   },
 
-  onReady() {
-  },
-
   onShow() {
     let that = this;
     wx.request({
@@ -138,25 +142,5 @@ Page({
         console.log(err);
       }
     })
-  },
-
-  onHide() {
-
-  },
-
-  onUnload() {
-
-  },
-
-  onPullDownRefresh() {
-
-  },
-
-  onReachBottom() {
-
-  },
-
-  onShareAppMessage() {
-
   }
 })

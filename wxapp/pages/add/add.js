@@ -34,9 +34,7 @@ Page({
           ...this.data.mqttOptions,
           clientId,
         })
-        console.log(this.data.client)
         if (this.data.client) {
-          console.log(nid)
           this.data.client.publish("delete",String(nid));
         }
         setTimeout(()=>{
@@ -78,7 +76,6 @@ Page({
 			sizeType: ['compressed'],
 			sourceType: ['album'],
       success: res=>{
-        // console.log(res.tempFiles[0].tempFilePath)
         this.setData({
           imgsrc:res.tempFiles[0].tempFilePath,
         })

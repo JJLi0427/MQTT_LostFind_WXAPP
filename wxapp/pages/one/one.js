@@ -53,7 +53,6 @@ Page({
         },
       })
     }
-    console.log("name:"+app.globalData.uname)
   },
   
   signIn() {
@@ -63,7 +62,6 @@ Page({
         ...this.data.mqttOptions,
         clientId,
       })
-      // console.log(this.data.client)
       if (this.data.client) {
         this.data.client.publish("signup", newMsg.account+","+newMsg.name+","+newMsg.phoneNumber);
       }

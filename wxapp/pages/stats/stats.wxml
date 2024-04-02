@@ -4,7 +4,6 @@
     <view class="first">📢最新消息</view>
     <view class="sum" animation="{{animationData}}">恭喜{{user.list[0].username}}同学找回物品</view>
   </view>
-
   <view class="menu1">
     <view class="first">总共帮用户找回物品</view>
     <view class="sum">{{totalFound}}件</view>

@@ -4,16 +4,6 @@
     <view class="first">已找回的物品数量</view>
     <view class="sum">{{found.totalFound}}</view>
   </view>
-  <!-- <view class="function">
-    <navigator class="menu" url="/pages/new/new">
-      <image src="/images/new.png" style="width: 40rpx; height: 40rpx;"></image>
-      <view>新增</view>
-    </navigator>
-    <navigator class="menu">
-      <image src="/images/all.png" style="width: 40rpx; height: 40rpx;"></image>
-      <view>历史</view>
-    </navigator>
-  </view> -->
   <view class="table">
     <view class="item">
       <view class="title">失物列表</view>

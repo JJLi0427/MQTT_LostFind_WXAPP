@@ -1,4 +1,5 @@
 // pages/one/one.js
+import mqtt from "../../utils/mqtt.min.js";
 const app = getApp()
 var newMsg = {}
 
@@ -57,10 +58,12 @@ Page({
   
   signIn() {
     if(newMsg.account != "" && newMsg.name != "" && newMsg.phoneNumber != "") {
+      const clientId = new Date().getTime()
       this.data.client = mqtt.connect(`wxs://101.201.100.189:8084/mqtt`, {
         ...this.data.mqttOptions,
         clientId,
       })
+      // console.log(this.data.client)
       if (this.data.client) {
         this.data.client.publish("signup", newMsg.account+","+newMsg.name+","+newMsg.phoneNumber);
       }
@@ -75,7 +78,7 @@ Page({
       setTimeout(function () {
         wx.hideLoading()
       }, 1000)      
-      updateMsg()
+      this.updateMsg()
     }
   },
 

@@ -2,9 +2,9 @@
 <view class="container">
   <view class="menu"> 
     <image src="{{imagePath}}" class="avatar" mode='aspectFit'></image>
-      <view>姓名: {{name}}</view>
-      <view>学号：{{account}}</view>
-      <view>手机：{{phoneNumber}}</view>
+      <view>姓名 : {{name}}</view>
+      <view>学号 ：{{account}}</view>
+      <view>手机 ：{{phoneNumber}}</view>
   </view>
   <view class="menu1">
     <view class="row">
@@ -17,8 +17,10 @@
       <input placeholder="手机" placeholder-class="txt" bindinput="phoneNumberInput"/>
     </view>
     <view>
+      <text></text>
     <view>
       <button class="submit" bindtap="updateMsg" style="width:30%">登录平台</button>
+      <button class="signin" bindtap="signIn" style="width:30%">注册</button>
     </view>
   </view>
   </view>

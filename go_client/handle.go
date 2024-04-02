@@ -86,7 +86,7 @@ func handleFindTopic(payload string, db *sql.DB) {
 // 处理 "signup" 主题的消息
 func handleSignupTopic(payload string, db *sql.DB) {
     parts := strings.Split(payload, ",")
-    if len(parts) == 4 {
+    if len(parts) == 3 {
         studentid := parts[0]
         username := parts[1]
         phonenumber := parts[2]

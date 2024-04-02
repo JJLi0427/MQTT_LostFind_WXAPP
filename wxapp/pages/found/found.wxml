@@ -21,7 +21,7 @@
     <view class="item" wx:for="{{mylost.list}}" wx:for-item="row" wx:key="index">
       <view class="save">
         <view class="photo">
-          <image src="{{row.photo}}" mode='aspectFit'></image>
+          <image src="data:image/jpg;base64, {{row.photo}}" mode='aspectFit'></image>
         </view>
         <view class="moredata">
           <view class="name">{{row.name}}</view>
@@ -48,7 +48,7 @@
     <view class="item" wx:for="{{found.list}}" wx:for-item="row" wx:key="index">
       <view class="save">
         <view class="photo">
-          <image src="{{row.photo}}" mode='aspectFit'></image>
+          <image src="data:image/jpg;base64, {{row.photo}}" mode='aspectFit'></image>
         </view>
         <view class="moredata">
           <view class="name">{{row.name}}</view>

@@ -1,8 +1,9 @@
 // pages/add/add.js
 import mqtt from "../../utils/mqtt.min.js";
+import {Base64} from "../../utils/base64";
 var newitem = {}
 var app = getApp()
-newitem.photo = "/images/photo.png"
+newitem.photo = ""
 Page({
   data: {
     mylost:{
@@ -11,9 +12,10 @@ Page({
      ],
      total: "",
     },
-    imgsrc:'/images/photo.png',
+    imgsrc:"/images/photo.png",
     client: null,
-    username: "Jiajun Li"
+    username: "Jiajun Li",
+    photo:"",
   },
   doDeleteRow(e){
     wx.showModal({
@@ -68,15 +70,16 @@ Page({
 			sizeType: ['compressed'],
 			sourceType: ['album'],
       success: res=>{
-        newitem.setData({
-          photo:wx.getFileSystemManager().readFileSync(res.tempFiles[0].tempFilePath, 'base64')
-        }), 
-        () => console.log(newitem.photo)
+        // console.log(res.tempFiles[0].tempFilePath)
+        this.setData({
+          imgsrc:res.tempFiles[0].tempFilePath,
+        })
+        newitem.photo = wx.getFileSystemManager().readFileSync(res.tempFiles[0].tempFilePath, 'base64')
       }
 		})
   },
   additem(e){
-    if (newitem.photo == "/images/photo.png") {
+    if (newitem.photo == "") {
       newitem.photo = wx.getFileSystemManager().readFileSync("/images/photo.png", 'base64')
     }
     if(newitem.name != "" && newitem.area != "" && newitem.phoneNumber != "" && app.globalData.uname != "app"){
@@ -122,9 +125,13 @@ Page({
         nm:app.globalData.uname
       },
       success:(res) => {
+        let processedData = res.data.data.map(item => {
+          item.photo = Base64.decode(item.photo);
+          return item;
+        });
         that.setData({
-          "mylost.list": res.data.data,
-          "mylost.total": res.data.data.length
+          "mylost.list": processedData,
+          "mylost.total": processedData.length
         })
       },
       fail:(err) => {

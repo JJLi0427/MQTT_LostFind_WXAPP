@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 
 	"log"
@@ -13,11 +14,11 @@ import (
 
 // 项目必须的主题
 var extraTopics = []string{
-	"lost", 
+	"lost",
 	"delete",
-	"find", 
-	"signup", 
-	"exit", 
+	"find",
+	"signup",
+	"exit",
 	"error",
 }
 
@@ -60,15 +61,21 @@ func subscribeTopics(client mqtt.Client, config Config, db *sql.DB) {
 		// 启动一个新的goroutine来处理这个消息
 		go handleMessage(client, msg, db)
 	}
-	// 添加新的主题
-    for _, extraTopic := range extraTopics {
-        topics = append(topics, extraTopic)
-    }
-	for _, topic := range topics {
-		token := client.Subscribe(topic, 0, messageHandler)
-		if token.Wait() && token.Error() != nil {
-			log.Fatal(token.Error())
-		}
-		log.Printf("Subscribe: %s\n", topic)
+	// 创建一个新的切片，包含config.MqttServer.Topic和extraTopics的所有元素
+	allTopics := append([]string{}, config.MqttServer.Topic...)
+	allTopics = append(allTopics, extraTopics...)
+
+	var wg sync.WaitGroup
+	for _, topic := range allTopics {
+		wg.Add(1)
+		go func(t string) {
+			defer wg.Done()
+			token := client.Subscribe(t, 0, messageHandler)
+			if token.Wait() && token.Error() != nil {
+				log.Fatal(token.Error())
+			}
+			log.Printf("Subscribe: %s\n", t)
+		}(topic)
 	}
+	wg.Wait()
 }

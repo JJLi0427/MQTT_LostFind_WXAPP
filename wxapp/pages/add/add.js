@@ -34,7 +34,9 @@ Page({
           ...this.data.mqttOptions,
           clientId,
         })
+        console.log(this.data.client)
         if (this.data.client) {
+          console.log(nid)
           this.data.client.publish("delete",String(nid));
         }
         setTimeout(()=>{

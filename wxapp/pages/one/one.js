@@ -73,12 +73,13 @@ Page({
       },1000)
       wx.showLoading({
         title: '注册中',
-        mask:true
+        mask: true
       })
       setTimeout(function () {
-        wx.hideLoading()
-      }, 1000)      
-      this.updateMsg()
+        wx.hideLoading(),
+        this.updateMsg()
+      }, 2000)      
+      // this.updateMsg()
     }
   },
 

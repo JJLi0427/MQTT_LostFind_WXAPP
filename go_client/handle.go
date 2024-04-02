@@ -42,6 +42,26 @@ func handleLostTopic(payload string, db *sql.DB) {
 	}
 }
 
+// 处理 "delete" 主题的消息
+func handleDeleteTopic(payload string, db *sql.DB) {
+    id, err := strconv.Atoi(payload)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // 删除数据库中指定物品
+    dbMutex.Lock()
+    _, err = db.Exec(
+        "DELETE FROM sutff WHERE id = ?", 
+        id,
+    )
+    dbMutex.Unlock()
+    if err != nil {
+        log.Fatal(err)
+    }
+    log.Printf("Lost item with ID:%d has been deleted\n", id)
+}
+
 // 处理 "find" 主题的消息
 func handleFindTopic(payload string, db *sql.DB) {
 	id, err := strconv.Atoi(payload)
@@ -65,31 +85,42 @@ func handleFindTopic(payload string, db *sql.DB) {
 
 // 处理 "signup" 主题的消息
 func handleSignupTopic(payload string, db *sql.DB) {
-	parts := strings.Split(payload, ",")
-	if len(parts) == 4 {
-		studentid := parts[0]
-		username := parts[1]
-		phonenumber := parts[2]
-		dbMutex.Lock()
+    parts := strings.Split(payload, ",")
+    if len(parts) == 3 {
+        studentid := parts[0]
+        username := parts[1]
+        phonenumber := parts[2]
+        dbMutex.Lock()
 
-		// 往数据库中存储新用户信息
-		_, err := db.Exec(
-			"INSERT INTO user (studentid, username, phonenumber) VALUES (?, ?, ?)",
-			studentid,
-			username,
-			phonenumber,
-		)
-		dbMutex.Unlock()
-		if err != nil {
-			log.Fatal(err)
-		}
-		log.Printf(
-			"New user add to database {User: %s, Name: %s, Phone: %s}\n",
-			studentid,
-			username,
-			phonenumber,
-		)
-	}
+        // 查询数据库中是否已经存在具有相同 studentid 的用户
+        var existingUser string
+        err := db.QueryRow("SELECT studentid FROM user WHERE studentid = ?", studentid).Scan(&existingUser)
+
+        // 如果查询结果返回了一个或多个记录，那么我们就不需要再插入新的用户
+        if err == nil {
+            dbMutex.Unlock()
+            log.Printf("User with studentid %s already exists\n", studentid)
+            return
+        }
+
+        // 往数据库中存储新用户信息
+        _, err = db.Exec(
+            "INSERT INTO user (studentid, username, phonenumber) VALUES (?, ?, ?)",
+            studentid,
+            username,
+            phonenumber,
+        )
+        dbMutex.Unlock()
+        if err != nil {
+            log.Fatal(err)
+        }
+        log.Printf(
+            "New user add to database {User: %s, Name: %s, Phone: %s}\n",
+            studentid,
+            username,
+            phonenumber,
+        )
+    }
 }
 
 // 处理接收到的消息
@@ -108,6 +139,8 @@ func handleMessage(client mqtt.Client, msg mqtt.Message, db *sql.DB) {
 	switch msg.Topic() {
 	case "lost":
 		handleLostTopic(payload, db)
+	case "delete":
+		handleDeleteTopic(payload, db)
 	case "find":
 		handleFindTopic(payload, db)
 	case "signup":

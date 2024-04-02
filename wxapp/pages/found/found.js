@@ -1,6 +1,7 @@
 // pages/found/found.js
 import mqtt from "../../utils/mqtt.min.js";
 import {Base64} from "../../utils/base64";
+
 var newitem = {}
 newitem.imgsrc = ""
 
@@ -25,7 +26,7 @@ Page({
 
   FindTheRow(e){
     var index = e.currentTarget.dataset.index;
-    var foundItem = this.data.mylost.list[index];
+    
     wx.showModal({
       title: '是否已找回？',
       confirmColor: "#ff461f",
@@ -66,6 +67,7 @@ Page({
             });
           }
         })
+        
         const clientId = new Date().getTime()
         this.data.client = mqtt.connect(`wxs://101.201.100.189:8084/mqtt`, {
           ...this.data.mqttOptions,
@@ -149,32 +151,4 @@ Page({
       fail:(err) => {console.log(err);}
     })
   },
-
-  onReady() {
-
-  },
-
-  onShow() {
-
-  },
-
-  onHide() {
-
-  },
-
-  onUnload() {
-
-  },
-
-  onPullDownRefresh() {
-
-  },
-
-  onReachBottom() {
-
-  },
-
-  onShareAppMessage() {
-
-  }
 })

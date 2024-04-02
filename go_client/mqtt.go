@@ -15,11 +15,13 @@ import (
 // 项目必须的主题
 var extraTopics = []string{
 	"lost",
+	"delete",
 	"find",
 	"signup",
 	"exit",
 	"error",
 }
+
 
 // 创建MQTT客户端
 func createMqttClient(config Config) mqtt.Client {
@@ -48,7 +50,8 @@ func createMqttClient(config Config) mqtt.Client {
 	if token.Wait() && token.Error() != nil {
 		log.Fatal(token.Error())
 	}
-	log.Printf("Connected to MQTT broker at: %s\n", broker) // 打印连接到服务器的 IP 和端口
+	// 打印连接到服务器的 IP 和端口
+	log.Printf("Connected to MQTT broker at: %s\n", broker)
 	return client
 }
 

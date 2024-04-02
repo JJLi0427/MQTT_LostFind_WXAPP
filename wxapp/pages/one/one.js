@@ -1,6 +1,8 @@
 // pages/one/one.js
+import mqtt from "../../utils/mqtt.min.js";
 const app = getApp()
 var newMsg = {}
+
 Page({
   data: {
     name: "",
@@ -9,19 +11,18 @@ Page({
     imagePath: "/images/one.png",
   },
 
-  getUser:function() {
-
-  },
   nameInput(e){
     newMsg.name = e.detail.value
   },
+
   accountInput(e){
     newMsg.account = e.detail.value
   },
+
   phoneNumberInput(e){
-    // console.log("Phone Number Input: " + e.detail.value)
     newMsg.phoneNumber = e.detail.value
   },
+
   updateMsg(e){
     if(newMsg.account != "" && newMsg.name != "" && newMsg.phoneNumber != "") {
       let that = this;
@@ -46,34 +47,41 @@ Page({
         },
         fail:(err) => {
           console.log(err);
+          wx.showToast({
+            title: "登录失败",
+          });
         },
       })
     }
-    console.log("name:"+app.globalData.uname)
+  },
+  
+  signIn() {
+    if(newMsg.account != "" && newMsg.name != "" && newMsg.phoneNumber != "") {
+      const clientId = new Date().getTime()
+      this.data.client = mqtt.connect(`wxs://101.201.100.189:8084/mqtt`, {
+        ...this.data.mqttOptions,
+        clientId,
+      })
+      if (this.data.client) {
+        this.data.client.publish("signup", newMsg.account+","+newMsg.name+","+newMsg.phoneNumber);
+      }
+      setTimeout(()=>{
+        this.data.client.end();
+        this.data.client = null;
+      },1000)
+      wx.showLoading({
+        title: '注册中',
+        mask: true
+      })
+      setTimeout(function () {
+        wx.hideLoading(),
+        this.updateMsg()
+      }, 2000)      
+      // this.updateMsg()
+    }
   },
 
   onLoad(options) {
 
   },
-
-  onReady() {
-  },
-
-  onShow() {
-  },
-
-  onHide() {
-  },
-
-  onUnload() {
-  },
-
-  onPullDownRefresh() {
-  },
-
-  onReachBottom() {
-  },
-
-  onShareAppMessage() {
-  }
 })

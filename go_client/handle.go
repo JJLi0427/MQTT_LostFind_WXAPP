@@ -128,8 +128,8 @@ func handleMessage(client mqtt.Client, msg mqtt.Message, db *sql.DB) {
 	switch msg.Topic() {
 	case "lost":
 		handleLostTopic(payload, db)
-		case "delete":
-			handleDeleteTopic(payload, db)
+	case "delete":
+		handleDeleteTopic(payload, db)
 	case "find":
 		handleFindTopic(payload, db)
 	case "signup":

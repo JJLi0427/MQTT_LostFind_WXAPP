@@ -8,6 +8,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"runtime"
 	"sync"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
@@ -109,6 +110,24 @@ func (lw logWriter) Write(p []byte) (n int, err error) {
 func main() {
 	// 设置日志输出到自定义的 Writer
 	log.SetOutput(logWriter{})
+
+	// 打印操作系统，处理器平台，CPU核心数和内存
+	memStats := &runtime.MemStats{}
+	runtime.ReadMemStats(memStats)
+	log.Println(
+		"OS:",
+		runtime.GOOS,
+		"|",
+		"Arch:",
+		runtime.GOARCH,
+		"|",
+		"CPU cores:",
+		runtime.NumCPU(),
+		"|",
+		"Memory:",
+		(memStats.Sys / 1024),
+		"MB",
+	)
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel() // 在main函数结束时取消上下文

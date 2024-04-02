@@ -129,10 +129,13 @@ GOOS={$YOUR_SYSTEM} GOARCH={$YOUR_CPU} go build -o {$EXE_FILE_NAME} -ldflags '-w
 ```
 4. Load WXAPP project through [Weixin DevTools](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
 5. Change the IP and Port part of the WXAPP code
+
 ## Todo
+**All we are completed**
 1. -[x] ~~Optimized the MQTT client architecture and runs based on configuration files~~
-2. -[ ] WXAPP implements online user registration
-3. -[x] ~~WXAPP realize lost items'photo upload
+2. -[X] ~~WXAPP implements online user registration~~
+3. -[x] ~~WXAPP realize lost items'photo upload~~  
+
 
 ## License
 This project is licensed under the [MIT License](https://opensource.org/license/MIT) - see the [LICENSE.txt](https://github.com/JJLi0427/MQTT_LostFind_wxapp/blob/main/LICENSE.txt) file for details.

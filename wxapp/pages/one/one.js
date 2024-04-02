@@ -80,8 +80,4 @@ Page({
       // this.updateMsg()
     }
   },
-
-  onLoad(options) {
-
-  },
 })

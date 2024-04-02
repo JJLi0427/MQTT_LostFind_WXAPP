@@ -9,7 +9,4 @@ App({
     },
     uname: "app"
   },
-  onLaunch() {
-
-  },
 })

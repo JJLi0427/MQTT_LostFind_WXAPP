@@ -20,7 +20,7 @@
       <text></text>
     <view>
       <button class="submit" bindtap="updateMsg" style="width:30%">登录平台</button>
-      <button class="signin" bindtap="signIn" style="width:30%">注册</button>
+      <button class="submit" bindtap="signIn" style="width:30%">注册</button>
     </view>
   </view>
   </view>

@@ -42,6 +42,26 @@ func handleLostTopic(payload string, db *sql.DB) {
 	}
 }
 
+// 处理 "delete" 主题的消息
+func handleDeleteTopic(payload string, db *sql.DB) {
+    id, err := strconv.Atoi(payload)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // 删除数据库中指定物品
+    dbMutex.Lock()
+    _, err = db.Exec(
+        "DELETE FROM sutff WHERE id = ?", 
+        id,
+    )
+    dbMutex.Unlock()
+    if err != nil {
+        log.Fatal(err)
+    }
+    log.Printf("Lost item with ID:%d has been deleted\n", id)
+}
+
 // 处理 "find" 主题的消息
 func handleFindTopic(payload string, db *sql.DB) {
 	id, err := strconv.Atoi(payload)
@@ -102,6 +122,8 @@ func handleMessage(client mqtt.Client, msg mqtt.Message, db *sql.DB) {
 	switch msg.Topic() {
 		case "lost":
 			handleLostTopic(payload, db)
+		case "delete":
+			handleDeleteTopic(payload, db)
 		case "find":
 			handleFindTopic(payload, db)
 		case "signup":

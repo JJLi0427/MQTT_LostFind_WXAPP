@@ -46,6 +46,9 @@ Page({
         },
         fail:(err) => {
           console.log(err);
+          wx.showToast({
+            title: "登录失败",
+          });
         },
       })
     }

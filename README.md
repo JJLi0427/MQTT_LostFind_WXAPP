@@ -36,7 +36,7 @@
 We are a group of students from Beijing Jiaotong University aiming to develop a campus lost and found mini program. Having recognized the lightweight, convenient, and secure nature of the MQTT communication protocol, we have chosen to build our project around it. Currently, we have successfully crafted a comprehensive mini program interface and interactive logic. For the communication related to lost and found items, we have developed a communication client using Go language to interact with the backend database effectively.
 
 ### Project Structure
-![Project Structure](./display/projectstructure.jpg)
+![Project Structure](./display/project_structure.jpg)  
 In this project, we adopt a front-end and back-end separation approach. The front-end interface retrieves data from the back-end database via DBAPI when the mini-program is launched or a page is displayed. In scenarios of uploading lost items or finding lost items, we use an MQTT client developed in Go language to make modifications to the mini-program on the server, thereby ensuring information security and efficient communication. 
 
 ### Database Design
@@ -71,10 +71,10 @@ In this project, we adopt a front-end and back-end separation approach. The fron
 ### MQTT Communication
 In the Internet of Things communication, MQTT is the first choice of most people, this protocol adopts a publish/subscribe model, only subscribed to a specific topic can receive a specific message, all communication is based on the MQTT server to do the relay, which improves the security and transmission efficiency. Based on this, we develop a communication client between the Lost and Found Mini Program and the back-end database, receive the subscribed messages and then operate the database, so that we can ensure the security of information release and the efficiency of communication on campus.    
 #### *An example of our MQTT client runtime*
-![Run Client](./display/mqttclient.gif)
+![Run Client](./display/mqttclient_work.gif)
 
 ### WXAPP Design
-![Interface Design](./display/wxappdesign.jpg)
+![Interface Design](./display/wxapp_design.jpg)
 - `Home page`: Show the WXAPP function enterance
 - `User page`: Show user information, everyone should long in WXAPP in tihs page at first
 - `Lost page`: User can add and manage their lost item in this page

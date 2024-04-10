@@ -37,7 +37,9 @@ We are a group of students from Beijing Jiaotong University aiming to develop a 
 
 ### Project Structure
 ![Project Structure](./display/project_structure.jpg)  
-In this project, we adopt a front-end and back-end separation approach. The front-end interface retrieves data from the back-end database via DBAPI when the mini-program is launched or a page is displayed. In scenarios of uploading lost items or finding lost items, we use an MQTT client developed in Go language to make modifications to the mini-program on the server, thereby ensuring information security and efficient communication. 
+In this project, we have adopted a classical front-end separation approach. We have implemented a dual-message link architecture relying on MQTT communication. The front-end interface retrieves data from the backend database using DBAPI upon the launch of the Mini Program or page display. For operations like adding, deleting, and modifying data—such as uploading lost items or finding lost items—we have developed a global MQTT client in Go language based on message subscription communication.  
+
+The client is designed to modify the server-side database, Mini Program only after receiving messages sent by the Mini Program. Communication between the Mini Program and the client is unidirectional, ensuring information security and efficient transmission. This setup aims to streamline the architecture while bolstering security and communication efficiency.
 
 ### Database Design
 #### *For lost item*
@@ -85,7 +87,7 @@ In the Internet of Things communication, MQTT is the first choice of most people
 团队来自于北京交通大学，项目旨在开发一个校园失物招领小程序。由于 MQTT 通信协议具有轻量，便捷和安全的特性，我们选择基于它构建我们的项目。目前项目已经实现了小程序界面和逻辑交互。对于失物招领相关的通信，我们使用 Go 语言的通信客户端，以便小程序与后端数据库进行高效的交互。
 
 ### 架构设计
-在这个项目中，我们采用前后端分离的方式，前端界面在小程序启动或者页面展示时通过DBAPI从后端数据库中获取数据。在上传失物或者是寻得失物的场景，通过我们使用 Go 语言开发的 MQTT 客户端对服务器中的小程序做修改，以此保证信息安全和通信的高效。
+在这个项目中，我们采用比较经典的前后端分离的方式。然后进一步我们依赖 MQTT 通信设计了一个双消息链路的架构。前端界面在小程序启动或者页面展示时通过DBAPI从后端数据库中获取数据。在上传失物或者是寻得失物等需要增删改操作数据的场景，我们专门用 Go 语言开发了一个全局的基于消息订阅方式来通信的 MQTT 客户端，客户端收到小程序发送的消息后才会对服务器中的小程序做修改，小程序对客户端的通信是单向的，以此保证信息安全和通信的高效。
 
 ### 数据库
 我们设计了以下两个表来存储我们的业务数据:   

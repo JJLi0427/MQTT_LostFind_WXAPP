@@ -36,7 +36,7 @@
 We are a group of students from Beijing Jiaotong University aiming to develop a campus lost and found mini program. Having recognized the lightweight, convenient, and secure nature of the MQTT communication protocol, we have chosen to build our project around it. Currently, we have successfully crafted a comprehensive mini program interface and interactive logic. For the communication related to lost and found items, we have developed a communication client using Go language to interact with the backend database effectively.
 
 ### Project Structure
-![Project Structure](./display/project_structure.jpg)  
+![Project Structure](http://sbs7mr5lm.sabkt.gdipper.com/github/project_structure.jpg?e=1712845841&token=qfWFemRkNu8X0u1-tiF-14hadfR_G5QPNFMzud4u:T_HWAa4ZYwnUFcY09EjTIGeHFUI=)  
 In this project, we have adopted a classical front-end separation approach. We have implemented a dual-message link architecture relying on MQTT communication. The front-end interface retrieves data from the backend database using DBAPI upon the launch of the Mini Program or page display. For operations like adding, deleting, and modifying data—such as uploading lost items or finding lost items—we have developed a global MQTT client in Go language based on message subscription communication.  
 
 The client is designed to modify the server-side database, Mini Program only after receiving messages sent by the Mini Program. Communication between the Mini Program and the client is unidirectional, ensuring information security and efficient transmission. This setup aims to streamline the architecture while bolstering security and communication efficiency.
@@ -73,10 +73,10 @@ The client is designed to modify the server-side database, Mini Program only aft
 ### MQTT Communication
 In the Internet of Things communication, MQTT is the first choice of most people, this protocol adopts a publish/subscribe model, only subscribed to a specific topic can receive a specific message, all communication is based on the MQTT server to do the relay, which improves the security and transmission efficiency. Based on this, we develop a communication client between the Lost and Found Mini Program and the back-end database, receive the subscribed messages and then operate the database, so that we can ensure the security of information release and the efficiency of communication on campus.    
 #### *An example of our MQTT client runtime*
-![Run Client](./display/mqttclient_work.gif)
+![Run Client](http://sbs7mr5lm.sabkt.gdipper.com/github/mqttclient_work.gif?e=1712845745&token=qfWFemRkNu8X0u1-tiF-14hadfR_G5QPNFMzud4u:3rnpUf2BzqYM1ygUyoSHIGBh9ZA=)
 
 ### WXAPP Design
-![Interface Design](./display/wxapp_design.jpg)
+![Interface Design](http://sbs7mr5lm.sabkt.gdipper.com/github/wxapp_design.jpg?e=1712845874&token=qfWFemRkNu8X0u1-tiF-14hadfR_G5QPNFMzud4u:qLetEPCSplNGlljB2C762eDjUPE=)
 - `Home page`: Show the WXAPP function enterance
 - `User page`: Show user information, everyone should long in WXAPP in tihs page at first
 - `Lost page`: User can add and manage their lost item in this page

@@ -39,7 +39,7 @@ We are a group of students from Beijing Jiaotong University aiming to develop a 
 
 ### Project Structure
 
-![Project Structure](http://sbs7mr5lm.sabkt.gdipper.com/github/project_structure.jpg?e=1712845841&token=qfWFemRkNu8X0u1-tiF-14hadfR_G5QPNFMzud4u:T_HWAa4ZYwnUFcY09EjTIGeHFUI=)  
+![Project Structure](./display/project_structure.jpg)  
 
 In this project, we have adopted a classical front-end separation approach. We have implemented a dual-message link architecture relying on MQTT communication. The front-end interface retrieves data from the backend database using DBAPI upon the launch of the Mini Program or page display. For operations like adding, deleting, and modifying data—such as uploading lost items or finding lost items—we have developed a global MQTT client in Go language based on message subscription communication.  
 
@@ -76,11 +76,11 @@ In the Internet of Things communication, MQTT is the first choice of most people
 
 #### *An example of our MQTT client runtime*
 
-![Run Client](http://sbs7mr5lm.sabkt.gdipper.com/github/mqttclient_work.gif?e=1712845745&token=qfWFemRkNu8X0u1-tiF-14hadfR_G5QPNFMzud4u:3rnpUf2BzqYM1ygUyoSHIGBh9ZA=)
+![Run Client](./display/mqttclient_work.gif)
 
 ### WXAPP Design
 
-![Interface Design](http://sbs7mr5lm.sabkt.gdipper.com/github/wxapp_design.jpg?e=1712845874&token=qfWFemRkNu8X0u1-tiF-14hadfR_G5QPNFMzud4u:qLetEPCSplNGlljB2C762eDjUPE=)
+![Interface Design](./display/wxapp_design.jpg)
 
 - `Home page`: Show the WXAPP function enterance
 - `User page`: Show user information, everyone should long in WXAPP in tihs page at first

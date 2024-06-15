@@ -152,7 +152,3 @@ In the Internet of Things communication, MQTT is the first choice of most people
 ## License
 
 This project is licensed under the [MIT License](https://opensource.org/license/MIT) - see the [LICENSE.txt](https://github.com/JJLi0427/MQTT_LostFind_wxapp/blob/main/LICENSE.txt) file for details.
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=JJLi0427/MQTT_LostFind_WXAPP&type=Date)](https://star-history.com/#JJLi0427/MQTT_LostFind_WXAPP&Date)

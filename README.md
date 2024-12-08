@@ -128,6 +128,7 @@ In the Internet of Things communication, MQTT is the first choice of most people
     * [MQTT client wechat miniprogram](https://github.com/emqx/MQTT-Client-Examples/tree/master/mqtt-client-wechat-miniprogram) project help WXAPP connect the go client
 
 2. Clone our repo or download our release code
+3. Create a database through `project.sql`
 3. `cd ./go` modify `config.json`, input your database and MQTT server configuration
 4. Build go MQTT clinet from source code client.go and run it:
    

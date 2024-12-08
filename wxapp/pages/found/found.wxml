@@ -1,7 +1,7 @@
 <!--pages/found/found.wxml-->
 <view class="container">
   <view class="top">
-    <view class="first">已找回的物品数量</view>
+    <view class="first">您已找回的物品数量</view>
     <view class="sum">{{found.totalFound}}</view>
   </view>
   <view class="table">
@@ -33,7 +33,7 @@
   </view>
   <view class="table">
     <view class="item">
-      <view class="title">已找回物品列表</view>
+      <view class="title">已找回列表</view>
     </view>
     <view class="item" wx:for="{{found.list}}" wx:for-item="row" wx:key="index">
       <view class="save">

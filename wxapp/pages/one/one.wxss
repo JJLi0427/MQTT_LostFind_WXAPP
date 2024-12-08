@@ -38,10 +38,19 @@
   justify-content: center;
 }
 
-.submit{
+.submit1{
   bottom: 40rpx;
   border-radius: 20rpx;
-  margin: 50rpx;
+  margin-top: 80rpx;
+  color: #fff;
+  background-color: #ff8800;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.submit2{
+  bottom: 40rpx;
+  border-radius: 20rpx;
+  margin-top: 20rpx;
   color: #fff;
   background-color: #ff8800;
   font-size: 32rpx;

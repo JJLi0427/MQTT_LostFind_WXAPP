@@ -41,7 +41,7 @@ jobs:
         GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o $FILENAME -ldflags '-w -s' ./*.go
       
     - name: Upload artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: mqtt_client_${{ matrix.goos }}_${{ matrix.goarch }}
         path: ./go_client/mqtt_client_${{ matrix.goos }}_${{ matrix.goarch }}*
@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download all artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         
       - name: Create Release
         uses: softprops/action-gh-release@v1

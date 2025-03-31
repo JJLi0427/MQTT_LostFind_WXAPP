@@ -39,7 +39,7 @@ We are a group of students from Beijing Jiaotong University aiming to develop a 
 
 ### Project Structure
 
-![Project Structure](./display/project_structure.jpg)  
+![Project Structure](./assets/project_structure.jpg)  
 
 In this project, we have adopted a classical front-end separation approach. We have implemented a dual-message link architecture relying on MQTT communication. The front-end interface retrieves data from the backend database using DBAPI upon the launch of the Mini Program or page display. For operations like adding, deleting, and modifying data—such as uploading lost items or finding lost items—we have developed a global MQTT client in Go language based on message subscription communication.  
 
@@ -76,11 +76,11 @@ In the Internet of Things communication, MQTT is the first choice of most people
 
 #### *An example of our MQTT client runtime*
 
-![Run Client](./display/mqttclient_work.gif)
+![Run Client](./assets/mqttclient_work.gif)
 
 ### WXAPP Design
 
-![Interface Design](./display/wxapp_design.jpg)
+![Interface Design](./assets/wxapp_design.jpg)
 
 - `Home page`: Show the WXAPP function enterance
 - `User page`: Show user information, everyone should long in WXAPP in tihs page at first
@@ -123,13 +123,12 @@ In the Internet of Things communication, MQTT is the first choice of most people
 1. At first install these dependencies
 
     * [MySQL](https://www.mysql.com/) as our project database
-    * [DBAIPI](https://www.51dbapi.com/) for WXAPP on load and some page on show
     * [EMQX](https://www.emqx.io/zh) help us build MQTT server 
     * [MQTT client wechat miniprogram](https://github.com/emqx/MQTT-Client-Examples/tree/master/mqtt-client-wechat-miniprogram) project help WXAPP connect the go client
 
 2. Clone our repo or download our release code
 3. Create a database through `project.sql`
-3. `cd ./go` modify `config.json`, input your database and MQTT server configuration
+3. `cd ./go_client` modify `config.json`, input your database and MQTT server configuration
 4. Build go MQTT clinet from source code client.go and run it:
    
     ```shell

@@ -1,0 +1,67 @@
+name: Build Go Client
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        goos: [linux, windows, darwin]
+        goarch: [amd64, arm64]
+        exclude:
+          # Exclude Windows ARM builds as they're less common
+          - goos: windows
+            goarch: arm64
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+
+    - name: Build
+      run: |
+        # Create directory for the build
+        mkdir -p ./go_client/build
+      working-directory: ./go_client
+      run: |
+        # Set filename based on OS
+        if [ "${{ matrix.goos }}" = "windows" ]; then
+          FILENAME="mqtt_client_${{ matrix.goos }}_${{ matrix.goarch }}.exe"
+        else
+          FILENAME="mqtt_client_${{ matrix.goos }}_${{ matrix.goarch }}"
+        fi
+        
+        # Build the binary
+        GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o $FILENAME -ldflags '-w -s' ./*.go
+      
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: mqtt_client_${{ matrix.goos }}_${{ matrix.goarch }}
+        path: ./go_client/build/mqtt_client_${{ matrix.goos }}_${{ matrix.goarch }}*
+
+  release:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+        
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: mqtt_client_*/*
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

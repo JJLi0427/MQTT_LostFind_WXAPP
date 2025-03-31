@@ -28,9 +28,6 @@ jobs:
         go-version: '1.21'
 
     - name: Build
-      run: |
-        # Create directory for the build
-        mkdir -p ./go_client/build
       working-directory: ./go_client
       run: |
         # Set filename based on OS
@@ -44,10 +41,10 @@ jobs:
         GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o $FILENAME -ldflags '-w -s' ./*.go
       
     - name: Upload artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3
       with:
         name: mqtt_client_${{ matrix.goos }}_${{ matrix.goarch }}
-        path: ./go_client/build/mqtt_client_${{ matrix.goos }}_${{ matrix.goarch }}*
+        path: ./go_client/mqtt_client_${{ matrix.goos }}_${{ matrix.goarch }}*
 
   release:
     needs: build
